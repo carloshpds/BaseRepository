@@ -3,7 +3,7 @@
 # ======================================
 # Imports
 # ======================================
-Ball = require '../game-objects/game-object'
+
 
 # ======================================
 # MenuState class
@@ -14,34 +14,30 @@ class MenuState
   # Override Method
   # ========================== 
   preload: ->
+    template = @game.state.getCurrentState().template
+
+    @load.image('background', template.get('background'))
+    @load.image('buttonPlayNormal', template.get('button_img'))
+    @animated = template.get('animated')
 
   create: ->
-    style =
-      font: "65px Arial"
-      fill: "#ffffff"
-      align: "center"
+    @background = @game.add.sprite(@game.world.centerX, @game.world.centerY, 'background')
+    @background.anchor.setTo(0, 0.5)
+    @background.x = 0
 
-    @sprite = @game.add.sprite(@game.world.centerX, 138, "ball")
-    @sprite.anchor.setTo 0.5, 0.5
-    @titleText = @game.add.text(@game.world.centerX, 300, "Phaser Game Example!", style)
-    @titleText.anchor.setTo 0.5, 0.5
-    @instructionsText = @game.add.text(@game.world.centerX, 400, "Click anywhere to play!",
-      font: "16px Arial"
-      fill: "#ffffff"
-      align: "center"
-    )
-    @instructionsText.anchor.setTo 0.5, 0.5
-    @sprite.angle = -20
-    @game.add.tween(@sprite).to
-      angle: 20
-    , 1000, Phaser.Easing.Linear.NONE, true, 0, 1000, true
+    buttonPlay = @game.add.button(@game.world.centerX, @game.world.centerY + 100, 'buttonPlayNormal', @buttonPressed, @, 0, 0, 0)
+    buttonPlay.anchor.setTo(0.5, 0.5)
+
+    if @animated
+      @game.add.tween(@background).to({x: -150}, 10000, Phaser.Easing.Linear.NONE, true, 0, 10000, true)
 
   update: ->
-    @game.state.start "play-state"  if @game.input.activePointer.justPressed()
 
   # ==========================
   # Handlers
   # ==========================
+  buttonPressed: (btn) =>
+    @game.state.start('play-state')
 
   # ==========================
   # Additional Method
