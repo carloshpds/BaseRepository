@@ -1,0 +1,67 @@
+
+  <ion-view class="default-screen ionic-body">
+
+    <header class="bar bar-header bar-dark">
+      <div class="buttons">
+        <button class="button button-clear" ng-click="goState('login')">
+          Login
+        </button>
+       </div>
+      <h1 class="title">Cadastro</h1>
+    </header>
+
+    <ion-content class="has-header">
+      <form name="form" class="list" ng-submit="validInput(user)" novalidate>
+        <label ng-class="{
+          item                 : true,
+          'item-input'         : true,
+          'item-stacked-label' : true,
+          invalid              : error.username
+        }">
+          <span class="input-label">Nome</span>
+          <input type="text" placeholder="Carlos Henrique" name="user_name" ng-model="user.username">
+          <p ng-show="error.username">Nome curto demais</p>
+        </label>
+        <label ng-class="{
+          item                 : true,
+          'item-input'         : true,
+          'item-stacked-label' : true,
+          invalid              : error.userPassword
+        }">
+          <span class="input-label">Senha</span>
+          <input type="password" placeholder="****" ng-model="user.password" name="user_password">
+          <p ng-show="error.userPassword">Senha inv&aacute;lida</p>
+        </label>
+        <label ng-class="{
+          item                 : true,
+          'item-input'         : true,
+          'item-stacked-label' : true,
+          invalid              : error.userConfirmPassword
+        }">
+          <span class="input-label">Confirme sua senha</span>
+          <input type="password" placeholder="****" ng-model="user.confirmPassword" name="user_confirm_password">
+          <p ng-show="error.userConfirmPassword">Sua senha n&atilde;o confere</p>
+        </label>
+        <label ng-class="{
+          item                 : true,
+          'item-input'         : true,
+          'item-stacked-label' : true,
+          invalid              : error.userEmail
+        }">
+          <span class="input-label">E-mail</span>
+          <input type="text" placeholder="carlos.henrique@email.com" ng-model="user.email" name="user_email">
+          <p ng-show="error.userEmail">Email inv&aacute;lido</p>
+        </label>
+
+        <div class="padding">
+          <input type="submit" id="sign-up-button" class="button button-block button-positive" value="Cadastrar"/>
+        </div>
+      </form>
+
+      <!-- Notifications -->
+      <!-- <div pegametro-alert></div> -->
+
+    </ion-content>
+
+  </ion-view>
+

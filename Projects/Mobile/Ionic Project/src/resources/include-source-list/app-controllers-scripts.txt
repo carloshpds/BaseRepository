@@ -1,0 +1,2 @@
+scripts/controllers/general/login/login-controller.js
+scripts/controllers/general/sign-up/sign-up-controller.js

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <meta charset="utf-8"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>IonicProjectModel</title>
+
+    <link href="styles/vendors.min.css"                   rel="stylesheet">
+    <link href="lib/animate-css/animate.min.css"          rel="stylesheet">
+    <link href="styles/project-name.min.css"              rel="stylesheet">
+
+  </head>
+  <body
+    ng-app   = "IonicProjectModelApp"
+    ng-class = "{
+      'on-android' : $root.currentOS === 'android',
+      'on-ios'     : $root.currentOS === 'ios'
+    }">
+
+    <!--======================-->
+    <!--  Notifications       -->
+    <!--======================-->
+    <div class="pm-notifications">
+      <span class="pm-notification" ng-repeat="notification in notifications">{{notification}}</span>
+    </div>
+
+
+    <!--======================-->
+    <!-- Application Content  -->
+    <!--======================-->
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+
+    <!--======================-->
+    <!-- Scripts              -->
+    <!--======================-->
+
+    <!--==========  Vendors  ============-->
+    <!-- build:js -->
+    <!-- include:js(list:www/resources/include-source-list/vendors-scripts.txt) -->
+    <!-- endbuild -->
+
+
+    <!--==========    App    ============-->
+
+    <!-- Configs -->
+    <!-- include:js(list:www/resources/include-source-list/app-config-scripts.txt) -->
+
+    <!-- Constants -->
+    <!-- include:js(list:www/resources/include-source-list/app-constants-scripts.txt) -->
+
+    <!-- Services -->
+    <!-- include:js(list:www/resources/include-source-list/app-services-scripts.txt) -->
+
+    <!-- Factories -->
+    <!-- include:js(list:www/resources/include-source-list/app-factories-scripts.txt) -->
+
+    <!-- Controllers -->
+    <!-- include:js(list:www/resources/include-source-list/app-controllers-scripts.txt) -->
+
+    <!-- Directives -->
+    <!-- include:js(list:www/resources/include-source-list/app-directives-scripts.txt) -->
+
+    <!-- Filters -->
+    <!-- include:js(list:www/resources/include-source-list/app-filters-scripts.txt) -->
+
+  </body>
+</html>

@@ -1,12 +1,22 @@
 {
   "name": "HelloIonic",
-  "private": "true",
+  "private": "false",
   "authors": [
-    "Carlos Henrique <carloshpds@gmail.com>",
-    "Bruno Fachine",
-    "Lucas Gabriel"
+    "Carlos Henrique <carloshpds@gmail.com>"
   ],
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-beta.6"
+    "jquery": "~1.9.1",
+    "underscore": "~1.6.0",
+    "angular-mocks": "~1.2.16",
+    "angular-scenario": "~1.2.16"
+  },
+  "dependencies": {
+    "angular-route": "~1.2.16",
+    "angular-resource": "~1.2.16",
+    "jquery": "1.9.1",
+    "ionic": "driftyco/ionic-bower#master",
+    "animate-css": "~3.1.1",
+    "quick-ng-repeat": "~0.0.1",
+    "momentjs": "~2.7.0"
   }
 }

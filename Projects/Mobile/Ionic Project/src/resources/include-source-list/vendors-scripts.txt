@@ -1,0 +1,13 @@
+lib/jquery/jquery.min.js
+lib/underscore/underscore.js
+lib/underscore-string.min.js
+lib/momentjs/min/moment-with-langs.min.js
+lib/ionic/js/ionic.bundle.min.js
+lib/angular-route/angular-route.min.js
+lib/angular-ui-router/release/angular-ui-router.min.js
+lib/angular-mocks/angular-mocks.js
+lib/angular-sanitize/angular-sanitize.min.js
+lib/angular-animate/angular-animate.min.js
+lib/quick-ng-repeat/quick-ng-repeat.js
+lib/ng-cordova.js
+cordova.js

@@ -1,0 +1,33 @@
+<ion-view class="default-screen ionic-body">
+    
+  <header class="bar bar-header bar-dark">
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="goState('sign-up')">
+        Cadastrar
+      </button>
+    </div>
+  </header>
+    
+  <ion-content class="has-header">
+    <form novalidate name="loginForm" ng-submit="clickLoginButtonHandler()">
+      
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Usuário ou e-mail</span>
+          <input type="text" placeholder="Carlos Henrique" name="user-name" ng-model="user.username" required>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Senha</span>
+          <input type="password"  placeholder="****" ng-model="user.password" name="user-password" required>
+        </label>
+      </div>
+
+      <div class="padding">
+        <button id="login-button" type="submit" class="button button-block button-positive">Entrar</button>
+      </div>
+
+    </form>
+
+  </ion-content>
+</ion-view>
