@@ -1,0 +1,44 @@
+
+.myo-modal
+  
+  .viewport
+    position: initial
+
+  .myo-modal-title
+    margin-bottom: $marginDefault * 4
+
+  .modal-content
+    padding       : 20px
+    border-radius : 0
+    box-shadow    : none
+
+
+  // ============
+  // Modal Large
+  // ============
+  & .modal-lg
+    $modalHeight : 700px 
+    $modalWidth  : 1000px 
+
+    .modal-content
+      width         : $modalWidth
+      margin-left   : -50px
+      height        : $modalHeight
+      max-height    : $modalHeight
+      padding       : 20px
+      border-radius : 0
+      box-shadow    : none
+      overflow      : hidden
+
+    .modal-text-container
+      width      : $modalWidth - 52px
+      overflow-x : hidden
+      height     : $modalHeight - 152px
+      
+      .viewport
+        height: $modalHeight - 52px
+
+      .overview
+        height: $modalHeight - 52px
+        padding-right : $paddingDefault
+
