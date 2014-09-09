@@ -8,7 +8,7 @@ describe 'Controller: LoginController', ()->
   # =============================================
   # Import modules
   # =============================================
-  beforeEach module('SonyGuruWebApp.scripts')
+  beforeEach module('MyAngularOmakase.scripts')
   beforeEach module('ui.router')
 
   # =============================================
