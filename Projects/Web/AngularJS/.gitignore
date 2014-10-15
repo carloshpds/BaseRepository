@@ -1,5 +1,6 @@
 node_modules/
 dist
+release
 bower_components
 ./**/*.DS_Store
 .sass-cache
