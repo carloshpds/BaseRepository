@@ -6,8 +6,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>MyAngularOmakase</title>
 
-    <link href="styles/vendors.min.css"    rel="stylesheet">
-    <link href="styles/project-name.min.css"  rel="stylesheet">
+    <link href="styles/vendors.min.css"      rel="stylesheet">
+    <link href="styles/project-name.min.css" rel="stylesheet">
 
   </head>
   <body>
@@ -22,19 +22,31 @@
     <!--======================-->
     <main id="app-container" ui-view=""></main>
 
+    <!--======================-->
+    <!-- Google Analytics     -->
+    <!--======================-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '__SG_ANALYTICS__', 'auto');
+    </script>
 
     <!--======================-->
     <!-- Scripts              -->
     <!--======================-->
-
     <!--==========  Vendors  ============-->
-    <!-- build:js -->
+    <!-- build:js scripts/vendors.min.js -->
+
     <!-- include:js(list:dist/resources/include-source-list/vendors-scripts.txt) -->
+
     <!-- endbuild -->
-    
 
     <!--==========    App    ============-->
-    
+    <!-- build:js scripts/app.min.js -->
+
     <!-- Configs -->
     <!-- include:js(list:dist/resources/include-source-list/app-config-scripts.txt) -->
 
@@ -43,7 +55,7 @@
 
     <!-- Constants -->
     <!-- include:js(list:dist/resources/include-source-list/app-constants-scripts.txt) -->
-   
+
     <!-- Services -->
     <!-- include:js(list:dist/resources/include-source-list/app-services-scripts.txt) -->
 
@@ -55,9 +67,10 @@
 
     <!-- Directives -->
     <!-- include:js(list:dist/resources/include-source-list/app-directives-scripts.txt) -->
- 
+
     <!-- Filters -->
     <!-- include:js(list:dist/resources/include-source-list/app-filters-scripts.txt) -->
 
+    <!-- endbuild -->
   </body>
 </html>
