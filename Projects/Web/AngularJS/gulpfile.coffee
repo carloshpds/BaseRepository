@@ -49,14 +49,14 @@ buildMode =
 # Dev Variables
 # ======================
 envDevVariables =
-  SG_CURRENT_IP : 'localhost:8080'
-  SG_ANALYTICS  : 'UA-DEV-CODE'
+  APP_CURRENT_IP : 'localhost:8080'
+  APP_ANALYTICS  : 'UA-DEV-CODE'
 
 # Prod Variables
 # ======================
 envProdVariables =
-  SG_CURRENT_IP : 'PROD-IP'
-  SG_ANALYTICS  : 'UA-PROD-CODE'
+  APP_CURRENT_IP : 'PROD-IP'
+  APP_ANALYTICS  : 'UA-PROD-CODE'
 
 # ==================================
 # Path Variables
@@ -387,8 +387,8 @@ replaceJSEnvVariables = (envVariablesMap, modeName) ->
 
   gulp.src sourceFiles
     .pipe regexReplacePlugin(
-      regex: envVariableFormat.preTextSalt + 'SG_CURRENT_IP' + envVariableFormat.posTextSalt
-      replace: envVariablesMap.SG_CURRENT_IP
+      regex: envVariableFormat.preTextSalt + 'APP_CURRENT_IP' + envVariableFormat.posTextSalt
+      replace: envVariablesMap.APP_CURRENT_IP
     )
     .on 'end' , -> gutil.log "[replace JS #{modeName} Variables]", gutil.colors.cyan 'done!'
     .pipe gulp.dest( destDirectory )
@@ -407,8 +407,8 @@ replaceIndexHTMLEnvVariables = (envVariablesMap, modeName) ->
 
   gulp.src sourceFiles
     .pipe regexReplacePlugin(
-      regex: envVariableFormat.preTextSalt + 'SG_ANALYTICS' + envVariableFormat.posTextSalt
-      replace: envVariablesMap.SG_ANALYTICS
+      regex: envVariableFormat.preTextSalt + 'APP_ANALYTICS' + envVariableFormat.posTextSalt
+      replace: envVariablesMap.APP_ANALYTICS
     )
     .on 'end' , ->
       gutil.log "[replace Index HTML #{modeName} Variables]", gutil.colors.cyan 'done!'
