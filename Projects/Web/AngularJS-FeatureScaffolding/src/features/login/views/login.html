@@ -1,0 +1,111 @@
+<div id="myo-login-screen" class="myo-app-view" myo-scrollbar>
+  
+  <!-- Barra Principal -->
+  <header class="myo-main-bar">
+    <div class="sony-logo"></div>
+    <div class="myo-main-bar-content">
+      
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <div class="screen-content">
+    
+    <!-- Logo Guru -->
+    <div class="row">
+      <div id="guru-logo" class="col-xs-12 col-md-12"></div>
+    </div>
+    
+    <div class="row">
+      <div id="welcome-text-container" class="col-xs-12 col-md-12 text-white myo-font-semibolditalic text-center">
+        <h1 class="">Oh Yeeeeah, it's gonna be legen...   wait for...   daaary!</h1>
+      </div>
+    </div>
+    
+    <!-- Wizard -->
+    <div id="wizard-container" class="margin-top-default">
+      <div>
+        <!-- Facebook -->
+        <div class="row">
+          <div class="col-xs-6 col-xs-offset-3 text-center margin-top-default"  >
+            <button class="btn myo-button myo-facebook-button form-control center-box" ng-click="doLoginWithFacebook()"  ng-disabled="!ableToConnectWithFacebook">
+              <span class="myo-font-lightitalic">Conecte-se usando o</span> <strong>facebook</strong>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Divisor -->
+        <div class="row margin-top-default text-white">
+          <div class="col-xs-4 col-xs-offset-4 text-center">
+            <span class="myo-font-lightitalic">ou</span>
+          </div>
+        </div>
+
+        <!-- Form de login -->
+        <div class="row margin-top-default">
+          <div class="col-xs-6 col-xs-offset-3 text-center"  >
+            <form novalidate id="login-form" class="css-form center-box" name="loginForm" ng-submit="clickLoginButtonHandler()">
+              
+              <div class="row">
+                <div id="user-name-container" class="col-xs-12 no-padding">
+                  <input type="text" 
+                    id         = "user-name" 
+                    placeholder= "Nome" 
+                    ng-model   = "user.firstName" 
+                    name       = "user-name" 
+                    class      = "form-control myo-input text-center"
+                    ng-class="{ 
+                      'has-error' : loginForm['user-name'].$invalid && !loginForm['user-name'].$pristine,
+                      'filled'    : user.firstName.length > 0
+                    }"
+                    required>
+                  <p 
+                    ng-class="{'help-block': true, 'help-error': true}" 
+                    ng-show="loginForm['user-name'].$error.required && !loginForm['user-name'].$pristine">
+                    Campo obrigatório
+                  </p>
+                </div>
+              </div>
+
+              <div class="row margin-top-default">
+                <div class="col-xs-12 no-padding">
+                  <input type="email" 
+                    id          = "user-email" 
+                    placeholder = "E-mail" 
+                    name        = "user-email" 
+                    ng-model    = "user.email"
+                    class       = "form-control myo-input text-center"
+                    ng-class    = "{ 
+                      'has-error' : loginForm['user-email'].$invalid && !loginForm['user-email'].$pristine,
+                      'filled'    : user.email.length > 0
+                    }"
+                    required>
+                  <p 
+                    ng-class="{'help-block': true, 'help-error': true}" 
+                    ng-show="loginForm['user-email'].$error.required && !loginForm['user-email'].$pristine">
+                    Campo obrigatório
+                  </p>
+                  <p 
+                    ng-class="{'help-block': true, 'help-error': true}" 
+                    ng-show="loginForm['user-email'].$error.email && !loginForm['user-email'].$pristine">
+                    Digite um e-mail válido
+                  </p>
+                </div>
+              </div>
+
+              <div class="row margin-top-default">
+                <div class="col-xs-12 no-padding text-center"  >
+                  <button type="submit" class="btn myo-button myo-button-primary form-control" ng-disabled="loginForm.$invalid">
+                    <span class="myo-font-lightitalic">Continuar</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+   
+  </div>
+</div>

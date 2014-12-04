@@ -1,0 +1,3 @@
+scripts/main/scripts/app.js
+scripts/main/scripts/config/routes/config-routes.js
+scripts/main/scripts/config/interceptors/user-login-interceptor.js

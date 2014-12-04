@@ -1,0 +1,14 @@
+libs/jquery/jquery.js
+libs/angular/angular.js
+libs/angular-bootstrap/ui-bootstrap-tpls.min.js
+libs/underscore/underscore.js
+libs/underscore-string.min.js
+libs/momentjs/min/moment-with-langs.min.js
+libs/angular-route/angular-route.min.js
+libs/angular-ui-router/release/angular-ui-router.min.js
+libs/angular-mocks/angular-mocks.js
+libs/angular-sanitize/angular-sanitize.min.js
+libs/quick-ng-repeat/quick-ng-repeat.js
+libs/jquery-cycle2/build/jquery.cycle2.js
+libs/jquery-cycle2/build/plugin/jquery.cycle2.carousel.min.js
+libs/jquery-custom-scrollbar/jquery.custom-scrollbar.js

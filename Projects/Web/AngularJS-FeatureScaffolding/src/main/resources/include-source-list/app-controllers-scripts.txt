@@ -1,0 +1,2 @@
+scripts/features/sign-up/scripts/sign-up-controller.js
+scripts/features/login/scripts/login-controller.js
