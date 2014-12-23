@@ -1,7 +1,7 @@
 'use strict';
 describe('Controller: LoginController', function() {
   var $scope, LoginController;
-  beforeEach(module('SonyGuruWebApp.scripts'));
+  beforeEach(module('MyAngularOmakase.scripts'));
   beforeEach(module('ui.router'));
   $scope = null;
   LoginController = null;

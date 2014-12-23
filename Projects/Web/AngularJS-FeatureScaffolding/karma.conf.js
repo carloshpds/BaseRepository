@@ -69,7 +69,7 @@ module.exports = function(config) {
       subdir: 'report-lcov',
 
       // output path
-      dir : 'test/coverage/'
+      dir : 'spec/coverage/'
     },
 
     // Which plugins to enable
