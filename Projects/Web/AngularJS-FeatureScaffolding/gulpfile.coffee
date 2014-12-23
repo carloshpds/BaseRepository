@@ -144,13 +144,13 @@ spec =
     directory   : 'spec/js'
     sourceFiles : [
       'dist/libs/angular/angular.js',
-      'dist/libs/jquery/jquery.min.js',
+      'dist/libs/jquery/jquery.js',
       'dist/libs/underscore/underscore.js',
-      'dist/libs/angular-ui-router/release/angular-ui-router.min.js',
+      'dist/libs/angular-ui-router/release/angular-ui-router.js',
       'dist/libs/angular-mocks/angular-mocks.js',
-      'dist/libs/angular-sanitize/angular-sanitize.min.js',
+      'dist/libs/angular-sanitize/angular-sanitize.js',
       'dist/scripts/**/*.js',
-      'dist/scripts/*.js',
+      'dist/views/**/*.html',
       'spec/**/*.js'
     ]
 
@@ -286,33 +286,33 @@ watch = ->
 
   gulp.watch(source.coffee.sourceFiles).on('change', (e) ->
     buildAppScripts()
-      .on 'end', -> 
+      .on 'end', ->
         replaceJSEnvVariables(envDevVariables, buildMode.dev)
         gutil.log( gutil.colors.red('[CoffeeWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
   gulp.watch(source.html.sourceFiles).on('change', (e) ->
     buildMarkup()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[HtmlWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
   gulp.watch(source.html.sourceFiles).on('change', (e) ->
     copyIndexToDistFolder()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[IndexFileWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
 
   gulp.watch(source.img.sourceFiles).on('change', (e) ->
     copyImgToDistFolder()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[CopyImgToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
   gulp.watch(source.resourcesFiles).on('change', (e) ->
     copyResourcesToDistFolder()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[CopyResourcesToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
@@ -464,7 +464,7 @@ replaceIndexHTMLEnvVariables = (envVariablesMap, modeName) ->
 # Watch specs files
 # ======================
 gulp.task 'watchSpecs', ['buildSpecScripts'], ->
-  gulp.watch source.coffee.sourceFiles    , ['buildSpecScripts']
+  gulp.watch source.coffee.sourceFiles, ['buildSpecScripts']
 
 
 # Build CoffeeScript
@@ -482,7 +482,7 @@ gulp.task 'runAppTests', ['buildSpecScripts'], () ->
   gulp.src(spec.js.sourceFiles)
     .pipe( karmaPlugin
       configFile: 'karma.conf.js'
-      action    : 'run'
+      action    : 'watch'
     )
     .on 'error', (err) ->
       console.log 'runAppTests: ' + err
