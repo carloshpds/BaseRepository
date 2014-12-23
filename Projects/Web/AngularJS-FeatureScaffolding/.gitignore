@@ -4,3 +4,4 @@ release
 bower_components
 ./**/*.DS_Store
 .sass-cache
+spec/coverage/
