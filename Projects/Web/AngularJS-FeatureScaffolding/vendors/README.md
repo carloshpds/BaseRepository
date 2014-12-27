@@ -10,5 +10,5 @@ We always need files that are not available at our package manager (Bower), or w
 # Português - BR
 
 ## Pasta `Vendors`
-Sempre precisamos de arquivos que não estão disponíveis em no nosso gerenciador de pacote (Bower), ou apenas queremos ter certeza que nosso projeto está utilizando uma versão customizada de alguma lib ou arquivos de terceiros. Está pasta é destinada a estes casos e outros casos na utilização de algo de terceiros.
+Sempre precisamos de arquivos que não estão disponíveis em no nosso gerenciador de pacote (Bower), ou apenas queremos ter certeza que nosso projeto está utilizando uma versão customizada de alguma lib ou arquivos de terceiros. Está pasta é destinada a estes e entre outros casos que possuem alguma utilização de recursos de terceiros.
  
