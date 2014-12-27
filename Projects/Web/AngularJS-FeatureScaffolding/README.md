@@ -1,8 +1,11 @@
 
 # English
 
+## Feature Scaffolding
+A scaffolding not based on framework's structure, but only on settings of the project, features and web components.
+
 ## Problems
-So you define your scaffolding according to your framework and what do you got? 
+So you define your scaffolding according to your framework and what do you get? 
 When we use BackboneJS you have an folder foreach struct: Models, Collections and Views.
 And when we use AngularJS is the same thing, but you have a folders for Controllers, another one for Directives, Factories etc...
 
@@ -37,3 +40,9 @@ $ sudo npm install -g bower gulp
 $ sudo npm install
 $ bower install
 ```
+
+## Desenvolvedores
+
+[![Carlos Henrique](https://avatars0.githubusercontent.com/u/2482989?v=3&s=96)](https://github.com/GabrielGarcia1) | [![Bruno Fachine](https://avatars3.githubusercontent.com/u/3225834?v=3&s=96)](https://github.com/BrunoDF)
+--- | --- | --- | --- | --- | --- | ---
+[Carlos Henrique](https://github.com/carloshpds)| [Bruno Fachine](https://github.com/BrunoDF)
