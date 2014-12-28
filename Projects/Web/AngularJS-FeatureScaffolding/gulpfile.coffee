@@ -75,84 +75,85 @@ envProdVariables =
 
 bowerDirectory = 'bower_components/**/*'
 
-vendors =
-  scripts      : 'vendors/scripts/**/*.js'
-  sass:
-    sourceFiles : 'vendors/styles/**/*.{sass, scss}'
-    mainSassFile: 'vendors/styles/vendors.sass'
-  css :
-    sourceFiles : 'vendors/styles/**/*.css'
+paths =
+  vendors :
+    scripts      : 'vendors/scripts/**/*.js'
+    sass:
+      sourceFiles : 'vendors/styles/**/*.{sass, scss}'
+      mainSassFile: 'vendors/styles/vendors.sass'
+    css :
+      sourceFiles : 'vendors/styles/**/*.css'
 
 
-source =
-  coffee:
-    sourceFiles : ['src/**/*.coffee']
-  sass:
-    sourceFiles : 'src/**/*.{sass, scss}'
-    mainSassFile: "src/main/styles/app.sass"
-  html:
-    sourceFiles : 'src/**/*.html'
-  img:
-    sourceFiles : 'src/main/img/**/*.{jpeg, jpg, png}'
-  resourcesFiles: 'src/main/resources/**/*'
-  indexFile: 'src/main/index.html'
+  source :
+    coffee:
+      sourceFiles : ['src/**/*.coffee']
+    sass:
+      sourceFiles : 'src/**/*.{sass, scss}'
+      mainSassFile: "src/main/styles/app.sass"
+    html:
+      sourceFiles : 'src/**/*.html'
+    img:
+      sourceFiles : 'src/main/img/**/*.{jpeg, jpg, png}'
+    resourcesFiles: 'src/main/resources/**/*'
+    indexFile: 'src/main/index.html'
 
 
 
-dist =
-  directory          : 'dist/'
-  jsDirectory        : 'dist/scripts/'
-  cssDirectory       : 'dist/styles/'
-  htmlDirectory      : 'dist/views/'
-  imgDirectory       : 'dist/img/'
-  indexFile          : 'dist/index.html'
-  libsDirectory      : 'dist/libs/'
-  resourcesDirectory : 'dist/resources/'
-  resourcesFiles     :
-    fonts  : 'dist/resources/fonts/**/*'
-    videos : 'dist/resources/videos/**/*'
-  files              : ['dist/scripts/**/*', 'dist/styles/**/*', 'dist/views/**/*', 'dist/img/**/*', 'dist/index.html']
-  vendorsCssFile     : 'dist/styles/vendors.min.css'
-  jsFiles            : 'dist/scripts/**/*'
-  cssFiles           : 'dist/styles/**/*'
-  htmlFiles          : 'dist/views/**/*'
-  imgFiles           : 'dist/img/**/*'
+  dev :
+    directory          : 'dev/'
+    jsDirectory        : 'dev/scripts/'
+    cssDirectory       : 'dev/styles/'
+    htmlDirectory      : 'dev/views/'
+    imgDirectory       : 'dev/img/'
+    indexFile          : 'dev/index.html'
+    libsDirectory      : 'dev/libs/'
+    resourcesDirectory : 'dev/resources/'
+    resourcesFiles     :
+      fonts  : 'dev/resources/fonts/**/*'
+      videos : 'dev/resources/videos/**/*'
+    files              : ['dev/scripts/**/*', 'dev/styles/**/*', 'dev/views/**/*', 'dev/img/**/*', 'dev/index.html']
+    vendorsCssFile     : 'dev/styles/vendors.min.css'
+    jsFiles            : 'dev/scripts/**/*'
+    cssFiles           : 'dev/styles/**/*'
+    htmlFiles          : 'dev/views/**/*'
+    imgFiles           : 'dev/img/**/*'
 
-release =
-  directory           : 'release/'
-  indexFile           : 'release/index.html'
-  htmlDirectory       : 'release/views/'
-  htmlFiles           : 'release/views/**/*'
-  cssDirectory        : 'release/styles/'
-  cssFiles            : 'release/styles/**/*'
-  jsDirectory         : 'release/scripts/'
-  jsFiles             : 'release/scripts/**/*'
-  imgDirectory        : 'release/img/'
-  imgFiles            : 'release/img/**/*'
-  resourcesDirectory  :
-    fonts  : 'release/resources/fonts/'
-    videos : 'release/resources/videos/'
-  resourcesFiles  :
-    fonts  : 'release/resources/fonts/**/*'
-    videos : 'release/resources/videos/**/*'
+  release :
+    directory           : 'release/'
+    indexFile           : 'release/index.html'
+    htmlDirectory       : 'release/views/'
+    htmlFiles           : 'release/views/**/*'
+    cssDirectory        : 'release/styles/'
+    cssFiles            : 'release/styles/**/*'
+    jsDirectory         : 'release/scripts/'
+    jsFiles             : 'release/scripts/**/*'
+    imgDirectory        : 'release/img/'
+    imgFiles            : 'release/img/**/*'
+    resourcesDirectory  :
+      fonts  : 'release/resources/fonts/'
+      videos : 'release/resources/videos/'
+    resourcesFiles  :
+      fonts  : 'release/resources/fonts/**/*'
+      videos : 'release/resources/videos/**/*'
 
 
-spec =
-  coffee:
-    sourceFiles : ['spec/coffee/**/*.coffee']
-  js:
-    directory   : 'spec/js'
-    sourceFiles : [
-      'dist/libs/angular/angular.js',
-      'dist/libs/jquery/jquery.min.js',
-      'dist/libs/underscore/underscore.js',
-      'dist/libs/angular-ui-router/release/angular-ui-router.min.js',
-      'dist/libs/angular-mocks/angular-mocks.js',
-      'dist/libs/angular-sanitize/angular-sanitize.min.js',
-      'dist/scripts/**/*.js',
-      'dist/scripts/*.js',
-      'spec/**/*.js'
-    ]
+  spec :
+    coffee:
+      sourceFiles : ['spec/coffee/**/*.coffee']
+    js:
+      directory   : 'spec/js'
+      sourceFiles : [
+        'dev/libs/angular/angular.js',
+        'dev/libs/jquery/jquery.min.js',
+        'dev/libs/underscore/underscore.js',
+        'dev/libs/angular-ui-router/release/angular-ui-router.min.js',
+        'dev/libs/angular-mocks/angular-mocks.js',
+        'dev/libs/angular-sanitize/angular-sanitize.min.js',
+        'dev/scripts/**/*.js',
+        'dev/scripts/*.js',
+        'spec/**/*.js'
+      ]
 
 
 # ==================================
@@ -189,28 +190,28 @@ install = ->
 # Build SASS
 # ======================
 buildVendorsSASS = ->
- gulp.src vendors.sass.mainSassFile
+ gulp.src paths.vendors.sass.mainSassFile
     .pipe sassPlugin()
     .pipe minifyCssPlugin keepSpecialComments: 0
     .pipe rename basename: 'vendors', extname: '.min.css'
-    .pipe gulp.dest dist.cssDirectory
+    .pipe gulp.dest paths.dev.cssDirectory
 
 # Build CSS
 # ======================
 buildVendorsStyles = ->
-  gulp.src [vendors.css.sourceFiles, dist.vendorsCssFile]
+  gulp.src [paths.vendors.css.sourceFiles, paths.dev.vendorsCssFile]
     .pipe concatPlugin('vendors')
     .pipe minifyCssPlugin keepSpecialComments: 0
     .pipe rename basename: 'vendors', extname: '.min.css'
-    .pipe gulp.dest dist.cssDirectory
+    .pipe gulp.dest paths.dev.cssDirectory
 
 
 buildVendorsScripts = ->
-  gulp.src vendors.scripts
-    .pipe gulp.dest(dist.libsDirectory)
+  gulp.src paths.vendors.scripts
+    .pipe gulp.dest(paths.dev.libsDirectory)
 
   gulp.src bowerDirectory
-    .pipe gulp.dest(dist.libsDirectory)
+    .pipe gulp.dest(paths.dev.libsDirectory)
 
 # ==================================
 # Source
@@ -219,53 +220,53 @@ buildVendorsScripts = ->
 # Build SASS
 # ======================
 buildAppStyles = () ->
-  gulp.src source.sass.mainSassFile
+  gulp.src paths.source.sass.mainSassFile
     .pipe plumberPlugin()
     .pipe sassPlugin()
     .pipe minifyCssPlugin keepSpecialComments: 0
     .pipe rename basename: "app", extname: '.min.css'
-    .pipe gulp.dest dist.cssDirectory
+    .pipe gulp.dest paths.dev.cssDirectory
 
 # Build CoffeeScript
 # ======================
 buildAppScripts = () ->
-  gulp.src source.coffee.sourceFiles
+  gulp.src paths.source.coffee.sourceFiles
     .pipe plumberPlugin()
     .pipe coffeePlugin bare: yes
     .on 'error', gutil.log
-    .pipe gulp.dest dist.jsDirectory
+    .pipe gulp.dest paths.dev.jsDirectory
 
 # Build HTML
 # ======================
 buildMarkup = ->
-  gulp.src(source.html.sourceFiles)
-    .pipe gulp.dest(dist.htmlDirectory)
+  gulp.src(paths.source.html.sourceFiles)
+    .pipe gulp.dest(paths.dev.htmlDirectory)
 
 # Copy Resources
 # ======================
 copyResourcesToDistFolder = ->
-  gulp.src(source.resourcesFiles)
-    .pipe gulp.dest(dist.resourcesDirectory)
+  gulp.src(paths.source.resourcesFiles)
+    .pipe gulp.dest(paths.dev.resourcesDirectory)
 
 # Copy Images to Dist
 # ======================
 copyImgToDistFolder = ->
-  gulp.src(source.img.sourceFiles)
-    .pipe gulp.dest(dist.imgDirectory)
+  gulp.src(paths.source.img.sourceFiles)
+    .pipe gulp.dest(paths.dev.imgDirectory)
 
 # Copy index.html
 # ======================
 copyIndexToDistFolder = ->
-  gulp.src(source.indexFile)
-    .pipe gulp.dest(dist.directory)
+  gulp.src(paths.source.indexFile)
+    .pipe gulp.dest(paths.dev.directory)
     .on 'end', includeSources
 
 # Include Sources from a list
 # ======================
 includeSources = ->
-  gulp.src dist.indexFile
-    .pipe includeSourcesPlugin({ cwd: dist.directory })
-    .pipe gulp.dest(dist.directory)
+  gulp.src paths.dev.indexFile
+    .pipe includeSourcesPlugin({ cwd: paths.dev.directory })
+    .pipe gulp.dest(paths.dev.directory)
     .on 'end', ->
       replaceIndexHTMLEnvVariables(envDevVariables, buildMode.dev)
 
@@ -276,41 +277,41 @@ includeSources = ->
 watch = ->
 
   # liveReloadPlugin.listen(LIVE_RELOAD_PORT)
-  # gulp.watch(dist.files).on 'change', liveReloadPlugin.changed
+  # gulp.watch(paths.dev.files).on 'change', liveReloadPlugin.changed
 
-  gulp.watch(source.sass.sourceFiles).on('change', (e) ->
+  gulp.watch(paths.source.sass.sourceFiles).on('change', (e) ->
     buildAppStyles()
       .on 'end', ->
         gutil.log( gutil.colors.red('[SassWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
-  gulp.watch(source.coffee.sourceFiles).on('change', (e) ->
+  gulp.watch(paths.source.coffee.sourceFiles).on('change', (e) ->
     buildAppScripts()
       .on 'end', -> 
         replaceJSEnvVariables(envDevVariables, buildMode.dev)
         gutil.log( gutil.colors.red('[CoffeeWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
-  gulp.watch(source.html.sourceFiles).on('change', (e) ->
+  gulp.watch(paths.source.html.sourceFiles).on('change', (e) ->
     buildMarkup()
       .on 'end', -> 
         gutil.log( gutil.colors.red('[HtmlWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
-  gulp.watch(source.html.sourceFiles).on('change', (e) ->
+  gulp.watch(paths.source.html.sourceFiles).on('change', (e) ->
     copyIndexToDistFolder()
       .on 'end', -> 
         gutil.log( gutil.colors.red('[IndexFileWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
 
-  gulp.watch(source.img.sourceFiles).on('change', (e) ->
+  gulp.watch(paths.source.img.sourceFiles).on('change', (e) ->
     copyImgToDistFolder()
       .on 'end', -> 
         gutil.log( gutil.colors.red('[CopyImgToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
-  gulp.watch(source.resourcesFiles).on('change', (e) ->
+  gulp.watch(paths.source.resourcesFiles).on('change', (e) ->
     copyResourcesToDistFolder()
       .on 'end', -> 
         gutil.log( gutil.colors.red('[CopyResourcesToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
@@ -323,17 +324,17 @@ watch = ->
 # Clean Dist Directories
 # ======================
 cleanDist = ->
-  gulp.src(dist.directory)
+  gulp.src(paths.dev.directory)
     .pipe cleanPlugin(force: yes)
 
 cleanDistScriptsDirectory = ->
-  gulp.src(dist.jsDirectory)
+  gulp.src(paths.dev.jsDirectory)
     .pipe cleanPlugin(force: yes)
 
 # Clean Release Directories
 # ======================
 cleanRelease = ->
-  gulp.src(release.directory)
+  gulp.src(paths.release.directory)
     .pipe cleanPlugin(force: yes)
 
 # ==================================
@@ -343,7 +344,7 @@ cleanRelease = ->
 # Build index.html
 # ======================
 proccessIndexFile = ->
-  gulp.src(dist.indexFile)
+  gulp.src(paths.dev.indexFile)
     .pipe(
       useminPlugin(
         js: [
@@ -351,68 +352,68 @@ proccessIndexFile = ->
         ]
       )
     )
-    .pipe(gulp.dest(release.directory))
+    .pipe(gulp.dest(paths.release.directory))
 
 # Copy Markup
 # ======================
 copyMarkupToReleaseFolder = ->
-  gulp.src(dist.htmlFiles)
-    .pipe gulp.dest(release.htmlDirectory)
+  gulp.src(paths.dev.htmlFiles)
+    .pipe gulp.dest(paths.release.htmlDirectory)
 
 # Minify Markup
 # ======================
 minifyMarkupInReleaseFolder = ->
-  gulp.src(release.htmlFiles)
+  gulp.src(paths.release.htmlFiles)
     .pipe(htmlMinPlugin(quotes: true, empty: true, spare: true))
-    .pipe(gulp.dest(release.htmlDirectory))
+    .pipe(gulp.dest(paths.release.htmlDirectory))
 
-  gulp.src(release.indexFile)
+  gulp.src(paths.release.indexFile)
     .pipe(htmlMinPlugin(quotes: true, empty: true, spare: true))
-    .pipe(gulp.dest(release.directory))
+    .pipe(gulp.dest(paths.release.directory))
 
 # Copy CSS
 # ======================
 copyCssToReleaseFolder = ->
-  gulp.src(dist.cssFiles)
-    .pipe gulp.dest(release.cssDirectory)
+  gulp.src(paths.dev.cssFiles)
+    .pipe gulp.dest(paths.release.cssDirectory)
 
 # Copy Img
 # ======================
 copyImgToReleaseFolder = ->
-  gulp.src(dist.imgFiles)
-    .pipe gulp.dest(release.imgDirectory)
+  gulp.src(paths.dev.imgFiles)
+    .pipe gulp.dest(paths.release.imgDirectory)
 
 # Optimize Img
 # ======================
 optimizeImgInReleaseFolder = ->
-  gulp.src(release.imgFiles)
+  gulp.src(paths.release.imgFiles)
     .pipe(minifyImagesPlugin())
-    .pipe gulp.dest(release.imgDirectory)
+    .pipe gulp.dest(paths.release.imgDirectory)
 
 # Copy Resources
 # ======================
 copyResourcesToReleaseFolder = ->
-  gulp.src(dist.resourcesFiles.fonts)
-    .pipe gulp.dest(release.resourcesDirectory.fonts)
+  gulp.src(paths.dev.resourcesFiles.fonts)
+    .pipe gulp.dest(paths.release.resourcesDirectory.fonts)
 
-  gulp.src(dist.resourcesFiles.videos)
-    .pipe gulp.dest(release.resourcesDirectory.videos)
+  gulp.src(paths.dev.resourcesFiles.videos)
+    .pipe gulp.dest(paths.release.resourcesDirectory.videos)
 
 
 # Ofuscates Javascript
 # ======================
 ofuscateJSFiles = ->
-  gulp.src release.jsFiles
+  gulp.src paths.release.jsFiles
     .pipe obfuscatePlugin(
       exclude       : ['angular', '_', '$', 'jQuery', 'videojs', '_V_', 'FB', '$injector']
     )
-    .pipe gulp.dest(release.jsDirectory)
+    .pipe gulp.dest(paths.release.jsDirectory)
 
 # Replace JS Env variables
 # ======================
 replaceJSEnvVariables = (envVariablesMap, modeName) ->
-  destDirectory = if modeName is buildMode.dev then dist.jsDirectory else release.jsDirectory
-  sourceFiles   = if modeName is buildMode.dev then dist.jsFiles     else release.jsFiles
+  destDirectory = if modeName is buildMode.dev then paths.dev.jsDirectory else paths.release.jsDirectory
+  sourceFiles   = if modeName is buildMode.dev then paths.dev.jsFiles     else paths.release.jsFiles
 
   gulp.src sourceFiles
     .pipe regexReplacePlugin(
@@ -429,8 +430,8 @@ replaceJSEnvVariables = (envVariablesMap, modeName) ->
 # Replace HTML Env variables
 # ======================
 replaceHTMLEnvVariables = (envVariablesMap, modeName) ->
-  destDirectory = if modeName is buildMode.dev then dist.htmlDirectory else release.htmlDirectory
-  sourceFiles   = if modeName is buildMode.dev then dist.htmlFiles     else release.htmlFiles
+  destDirectory = if modeName is buildMode.dev then paths.dev.htmlDirectory else paths.release.htmlDirectory
+  sourceFiles   = if modeName is buildMode.dev then paths.dev.htmlFiles     else paths.release.htmlFiles
 
   # gulp.src sourceFiles
   #   .pipe regexReplacePlugin(
@@ -444,8 +445,8 @@ replaceHTMLEnvVariables = (envVariablesMap, modeName) ->
 # Replace Index HTML Env variables
 # ======================
 replaceIndexHTMLEnvVariables = (envVariablesMap, modeName) ->
-  destDirectory = if modeName is buildMode.dev then dist.directory else release.directory
-  sourceFiles   = if modeName is buildMode.dev then dist.indexFile else release.indexFile
+  destDirectory = if modeName is buildMode.dev then paths.dev.directory else paths.release.directory
+  sourceFiles   = if modeName is buildMode.dev then paths.dev.indexFile else paths.release.indexFile
 
   gulp.src sourceFiles
     .pipe regexReplacePlugin(
@@ -464,22 +465,22 @@ replaceIndexHTMLEnvVariables = (envVariablesMap, modeName) ->
 # Watch specs files
 # ======================
 gulp.task 'watchSpecs', ['buildSpecScripts'], ->
-  gulp.watch source.coffee.sourceFiles    , ['buildSpecScripts']
+  gulp.watch paths.source.coffee.sourceFiles    , ['buildSpecScripts']
 
 
 # Build CoffeeScript
 # ======================
 gulp.task 'buildSpecScripts', [], ->
-  gulp.src spec.coffee.sourceFiles
+  gulp.src paths.spec.coffee.sourceFiles
     .pipe coffeePlugin bare: yes
     .on 'error', gutil.log
-    .pipe gulp.dest spec.js.directory
+    .pipe gulp.dest paths.spec.js.directory
 
 
 # RunAppTests
 # ======================
 gulp.task 'runAppTests', ['buildSpecScripts'], () ->
-  gulp.src(spec.js.sourceFiles)
+  gulp.src(paths.spec.js.sourceFiles)
     .pipe( karmaPlugin
       configFile: 'karma.conf.js'
       action    : 'run'
@@ -493,7 +494,7 @@ gulp.task 'runAppTests', ['buildSpecScripts'], () ->
 # Register Macro Tasks
 # ==================================
 
-# Dist tasks
+# Dev Distribuition tasks
 # =======================
 gulp.task 'cleanDist'                    , [                           ], cleanDist
 gulp.task 'gitCheck'                     , ['cleanDist'                ], gitCheck
