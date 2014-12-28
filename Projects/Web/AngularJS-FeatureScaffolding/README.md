@@ -13,15 +13,15 @@ That's all right, but if you think that a view has a template you'll need anothe
  ```
   scripts/
    |-- controllers/
-    |--myFeature (contains js files of myFeatureOne)
+    |--myFeature (contains js files of myFeature)
   
   templates/
    |-- views/
-    |-- myFeatureTemplates (contains html files of myFeatureOne)
+    |-- myFeatureTemplates (contains html files of myFeature)
   
   styles/
    |-- views/
-   myFeatureStyles (contains css files of myFeatureOne)
+   myFeatureStyles (contains css files of myFeature)
  ```
  
 All right, that works! But we have only one feature in our project, more and more will be implemented and we will get a lot of folders in our project. So if i ask to you extract or remove a feature from your project, would be easy?
