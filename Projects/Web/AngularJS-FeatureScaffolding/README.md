@@ -10,17 +10,20 @@ When we use BackboneJS you have an folder foreach struct: Models, Collections an
 And when we use AngularJS is the same thing, but you have a folders for Controllers, another one for Directives, Factories etc...
 
 That's all right, but if you think that a view has a template you'll need another folder almost at the top level of your scaffolding only to contain the template files, and is the same thing for stylesheets, could be something like this:
+ ```
+  scripts/
+   |-- controllers/
+    |--myFeature (contains js files of myFeature)
+  
+  templates/
+   |-- views/
+    |-- myFeatureTemplates (contains html files of myFeature)
+  
+  styles/
+   |-- views/
+   myFeatureStyles (contains css files of myFeature)
+ ```
  
-  * scripts
-    + controllers
-      - myFeature `(contains js files of myFeatureOne)`
-  * templates
-    + views
-      - myFeatureTemplates `(contains html files of myFeatureOne)`
-  * styles
-    + views
-      - myFeatureStyles `(contains css files of myFeatureOne)`
-
 All right, that works! But we have only one feature in our project, more and more will be implemented and we will get a lot of folders in our project. So if i ask to you extract or remove a feature from your project, would be easy?
 
 ### The first problem: Maintenance or remove a feature
@@ -41,7 +44,7 @@ $ sudo npm install
 $ bower install
 ```
 
-## Developers
+## Authors
 
 [![Carlos Henrique](https://avatars0.githubusercontent.com/u/2482989?v=3&s=96)](https://github.com/GabrielGarcia1) | [![Bruno Fachine](https://avatars3.githubusercontent.com/u/3225834?v=3&s=96)](https://github.com/BrunoDF)
 --- | --- | --- | --- | --- | --- | ---
