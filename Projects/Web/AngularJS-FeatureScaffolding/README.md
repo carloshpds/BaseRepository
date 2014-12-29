@@ -2,7 +2,7 @@
 # English
 
 ## Feature Scaffolding
-A scaffolding not based on framework's structure, but only on settings of the project, features and web components.
+A scaffolding not based on framework's structure, but only in features, settings of the project and web components.
 
 ## Problems
 So you define your scaffolding according to your framework and what do you get? 
