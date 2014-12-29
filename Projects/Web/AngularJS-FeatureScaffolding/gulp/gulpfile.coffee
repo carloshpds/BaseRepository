@@ -6,7 +6,6 @@ gulp                  = require 'gulp'
 gutil                 = require 'gulp-util'
 bower                 = require 'bower'
 concatPlugin          = require 'gulp-concat'
-sassPlugin            = require 'gulp-ruby-sass'
 minifyCssPlugin       = require 'gulp-minify-css'
 rename                = require 'gulp-rename'
 shellPlugin           = require 'shelljs'
@@ -14,7 +13,6 @@ coffeePlugin          = require 'gulp-coffee'
 ifPlugin              = require 'gulp-if'
 cleanPlugin           = require 'gulp-clean'
 karmaPlugin           = require 'gulp-karma'
-spaPlugin             = require 'gulp-spa'
 uglifyPlugin          = require 'gulp-uglify'
 htmlMinPlugin         = require 'gulp-minify-html'
 plumberPlugin         = require 'gulp-plumber'
@@ -25,9 +23,9 @@ minifyImagesPlugin    = require 'gulp-imagemin'
 revPlugin             = require 'gulp-rev'
 _                     = require 'lodash'
 useminPlugin          = require 'gulp-usemin'
-frepPlugin            = require 'gulp-frep'
 obfuscatePlugin       = require 'gulp-obfuscate'
 regexReplacePlugin    = require 'gulp-regex-replace'
+gulpSassPlugin        = require 'gulp-sass'
 
 
 
@@ -40,34 +38,11 @@ projectName =
 
 LIVE_RELOAD_PORT = 35729
 
-envVariableFormat =
-  preTextSalt : '__'
-  posTextSalt : '__'
 
 buildMode =
   dev  : 'Dev'
   prod : 'Prod'
 
-# Dev Variables
-# ======================
-envDevVariables =
-  SG_CURRENT_IP     : 'localhost:8080'
-  SG_ANALYTICS      : ''
-  SG_ADMIN_BASE_URL : ''
-
-# Server Test Variables
-# ======================
-envServerTestVariables =
-  SG_CURRENT_IP     : 'localhost:8080'
-  SG_ANALYTICS      : ''
-  SG_ADMIN_BASE_URL : ''
-
-# Prod Variables
-# ======================
-envProdVariables =
-  SG_CURRENT_IP     : 'localhost:8080'
-  SG_ANALYTICS      : ''
-  SG_ADMIN_BASE_URL : ''
 
 # ==================================
 # Path Variables
@@ -138,10 +113,8 @@ paths =
       videos : 'release/resources/videos/**/*'
 
   spec :
-    coffee:
-      sourceFiles : ['spec/coffee/**/*.coffee']
     js:
-      directory   : 'spec/js'
+      directory   : 'dev/spec/'
       sourceFiles : [
         'dev/libs/jquery/jquery.js',
         'dev/libs/angular/angular.js',
@@ -160,8 +133,8 @@ paths =
         'dev/scripts/main/scripts/constants/**/*.js',
         'dev/scripts/main/scripts/runners/**/*.js',
         'dev/views/**/*.html',
-        'spec/js/**/*.js'
-        'spec/utils/**/*.js'
+        'dev/scripts/**/spec/**/*.js'
+        'dev/scripts/main/spec/utils/**/*.js'
       ]
 
 
@@ -199,11 +172,11 @@ install = ->
 # Build SASS
 # ======================
 buildVendorsSASS = ->
- # gulp.src paths.vendors.sass.mainSassFile
- #    .pipe sassPlugin()
- #    .pipe minifyCssPlugin keepSpecialComments: 0
- #    .pipe rename basename: 'vendors', extname: '.min.css'
- #    .pipe gulp.dest paths.dev.cssDirectory
+  gulp.src paths.vendors.sass.mainSassFile
+     .pipe gulpSassPlugin(indentedSyntax: yes)
+     .pipe minifyCssPlugin keepSpecialComments: 0
+     .pipe rename basename: 'vendors', extname: '.min.css'
+     .pipe gulp.dest paths.dev.cssDirectory
 
 # Build CSS
 # ======================
@@ -231,7 +204,10 @@ buildVendorsScripts = ->
 buildAppStyles = () ->
   gulp.src paths.source.sass.mainSassFile
     .pipe plumberPlugin()
-    .pipe sassPlugin()
+    .pipe gulpSassPlugin(
+      indentedSyntax: yes
+      onError: (error) -> console.log('SASS-ERROR: ' + error.message);
+    )
     .pipe minifyCssPlugin keepSpecialComments: 0
     .pipe rename basename: "app", extname: '.min.css'
     .pipe gulp.dest paths.dev.cssDirectory
@@ -253,13 +229,13 @@ buildMarkup = ->
 
 # Copy Resources
 # ======================
-copyResourcesToDistFolder = ->
+copyResourcesToDevFolder = ->
   gulp.src(paths.source.resourcesFiles)
     .pipe gulp.dest(paths.dev.resourcesDirectory)
 
 # Copy Images to Dist
 # ======================
-copyImgToDistFolder = ->
+copyImgToDevFolder = ->
   gulp.src(paths.source.img.sourceFiles)
     .pipe gulp.dest(paths.dev.imgDirectory)
 
@@ -276,8 +252,6 @@ includeSources = ->
   gulp.src paths.dev.indexFile
     .pipe includeSourcesPlugin({ cwd: paths.dev.directory })
     .pipe gulp.dest(paths.dev.directory)
-    .on 'end', ->
-      replaceIndexHTMLEnvVariables(envDevVariables, buildMode.dev)
 
 
 # ==================================
@@ -297,7 +271,6 @@ watch = ->
   gulp.watch(paths.source.coffee.sourceFiles).on('change', (e) ->
     buildAppScripts()
       .on 'end', ->
-        replaceJSEnvVariables(envDevVariables, buildMode.dev)
         gutil.log( gutil.colors.red('[CoffeeWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
@@ -315,15 +288,15 @@ watch = ->
 
 
   gulp.watch(paths.source.img.sourceFiles).on('change', (e) ->
-    copyImgToDistFolder()
+    copyImgToDevFolder()
       .on 'end', ->
-        gutil.log( gutil.colors.red('[CopyImgToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
+        gutil.log( gutil.colors.red('[CopyImgToDevFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
   gulp.watch(paths.source.resourcesFiles).on('change', (e) ->
-    copyResourcesToDistFolder()
+    copyResourcesToDevFolder()
       .on 'end', ->
-        gutil.log( gutil.colors.red('[CopyResourcesToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
+        gutil.log( gutil.colors.red('[CopyResourcesToDevFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
 # ==================================
@@ -332,11 +305,11 @@ watch = ->
 
 # Clean Dist Directories
 # ======================
-cleanDist = ->
+cleanDev = ->
   gulp.src(paths.dev.directory)
     .pipe cleanPlugin(force: yes)
 
-cleanDistScriptsDirectory = ->
+cleanDevScriptsDirectory = ->
   gulp.src(paths.dev.jsDirectory)
     .pipe cleanPlugin(force: yes)
 
@@ -418,74 +391,11 @@ ofuscateJSFiles = ->
     )
     .pipe gulp.dest(paths.release.jsDirectory)
 
-# Replace JS Env variables
-# ======================
-replaceJSEnvVariables = (envVariablesMap, modeName) ->
-  destDirectory = if modeName is buildMode.dev then paths.dev.jsDirectory else paths.release.jsDirectory
-  sourceFiles   = if modeName is buildMode.dev then paths.dev.jsFiles     else paths.release.jsFiles
-
-  gulp.src sourceFiles
-    .pipe regexReplacePlugin(
-      regex   : envVariableFormat.preTextSalt + 'SG_CURRENT_IP' + envVariableFormat.posTextSalt
-      replace : envVariablesMap.SG_CURRENT_IP
-    )
-    .pipe regexReplacePlugin(
-      regex   : envVariableFormat.preTextSalt + 'SG_ADMIN_BASE_URL' + envVariableFormat.posTextSalt
-      replace : envVariablesMap.SG_ADMIN_BASE_URL
-    )
-    .on 'end' , -> gutil.log "[replace JS #{modeName} Variables]", gutil.colors.cyan 'done!'
-    .pipe gulp.dest( destDirectory )
-
-# Replace HTML Env variables
-# ======================
-replaceHTMLEnvVariables = (envVariablesMap, modeName) ->
-  destDirectory = if modeName is buildMode.dev then paths.dev.htmlDirectory else paths.release.htmlDirectory
-  sourceFiles   = if modeName is buildMode.dev then paths.dev.htmlFiles     else paths.release.htmlFiles
-
-  # gulp.src sourceFiles
-  #   .pipe regexReplacePlugin(
-  #     regex: envVariableFormat.preTextSalt + 'SG_ANALYTICS' + envVariableFormat.posTextSalt
-  #     replace: envVariablesMap.SG_ANALYTICS
-  #   )
-  #   .on 'end' , ->
-  #     gutil.log "[replace HTML #{modeName} Variables]", gutil.colors.cyan 'done!'
-  #   .pipe gulp.dest( destDirectory )
-
-# Replace Index HTML Env variables
-# ======================
-replaceIndexHTMLEnvVariables = (envVariablesMap, modeName) ->
-  destDirectory = if modeName is buildMode.dev then paths.dev.directory else paths.release.directory
-  sourceFiles   = if modeName is buildMode.dev then paths.dev.indexFile else paths.release.indexFile
-
-  gulp.src sourceFiles
-    .pipe regexReplacePlugin(
-      regex: envVariableFormat.preTextSalt + 'SG_ANALYTICS' + envVariableFormat.posTextSalt
-      replace: envVariablesMap.SG_ANALYTICS
-    )
-    .on 'end' , ->
-      gutil.log "[replace Index HTML #{modeName} Variables]", gutil.colors.cyan 'done!'
-    .pipe gulp.dest( destDirectory )
 
 
 # ==================================
 # Spec
 # ==================================
-
-# Watch specs files
-# ======================
-gulp.task 'watchSpecs', ['buildSpecScripts'], ->
-  gutil.log "[Build Spec Scripts]", gutil.colors.cyan 'Building...'
-  gulp.watch paths.spec.coffee.sourceFiles, ['buildSpecScripts']
-
-
-# Build CoffeeScript
-# ======================
-gulp.task 'buildSpecScripts', [], ->
-  gulp.src paths.spec.coffee.sourceFiles
-    .pipe coffeePlugin bare: yes
-    .on 'error', gutil.log
-    .pipe gulp.dest paths.spec.js.directory
-
 
 # RunAppTests
 # ======================
@@ -506,26 +416,23 @@ gulp.task 'runAppTests', ['buildSpecScripts'], () ->
 
 # Dev Distribuition tasks
 # =======================
-gulp.task 'cleanDist'                    , [                           ], cleanDist
-gulp.task 'gitCheck'                     , ['cleanDist'                ], gitCheck
-gulp.task 'install'                      , ['gitCheck'                 ], install
-gulp.task 'buildVendorsSASS'             , ['install'                  ], buildVendorsSASS
-gulp.task 'buildVendorsStyles'           , ['buildVendorsSASS'         ], buildVendorsStyles
-gulp.task 'buildVendorsScripts'          , ['install'                  ], buildVendorsScripts
-gulp.task 'buildAppStyles'               , ['cleanDist'                ], buildAppStyles
-gulp.task 'buildAppScripts'              , ['cleanDist'                ], buildAppScripts
-gulp.task 'buildMarkup'                  , ['cleanDist'                ], buildMarkup
-gulp.task 'copyResourcesToDistFolder'    , ['cleanDist'                ], copyResourcesToDistFolder
-gulp.task 'copyImgToDistFolder'          , ['cleanDist'                ], copyImgToDistFolder
-gulp.task 'copyIndexToDistFolder'        , ['copyResourcesToDistFolder'], copyIndexToDistFolder
-gulp.task 'replaceJSDevVariables'        , ['default'                  ], -> replaceJSEnvVariables(envDevVariables, buildMode.dev)
-gulp.task 'replaceHTMLDevVariables'      , ['default'                  ], -> replaceHTMLEnvVariables(envDevVariables, buildMode.dev)
-gulp.task 'replaceIndexHTMLDevVariables' , ['default'                  ], -> replaceIndexHTMLEnvVariables(envDevVariables, buildMode.dev)
+gulp.task 'cleanDev'                    , [                           ], cleanDev
+gulp.task 'gitCheck'                     , ['cleanDev'                ], gitCheck
+gulp.task 'install'                      , ['gitCheck'                ], install
+gulp.task 'buildVendorsSASS'             , ['install'                 ], buildVendorsSASS
+gulp.task 'buildVendorsStyles'           , ['buildVendorsSASS'        ], buildVendorsStyles
+gulp.task 'buildVendorsScripts'          , ['install'                 ], buildVendorsScripts
+gulp.task 'buildAppStyles'               , ['cleanDev'                ], buildAppStyles
+gulp.task 'buildAppScripts'              , ['cleanDev'                ], buildAppScripts
+gulp.task 'buildMarkup'                  , ['cleanDev'                ], buildMarkup
+gulp.task 'copyResourcesToDevFolder'     , ['cleanDev'                ], copyResourcesToDevFolder
+gulp.task 'copyImgToDevFolder'           , ['cleanDev'                ], copyImgToDevFolder
+gulp.task 'copyIndexToDistFolder'        , ['copyResourcesToDevFolder'], copyIndexToDistFolder
 
 
 
 gulp.task 'default', [
-  'cleanDist'
+  'cleanDev'
   'gitCheck'
   'install'
   'buildVendorsSASS'
@@ -534,8 +441,8 @@ gulp.task 'default', [
   'buildAppStyles'
   'buildAppScripts'
   'buildMarkup'
-  'copyResourcesToDistFolder'
-  'copyImgToDistFolder'
+  'copyResourcesToDevFolder'
+  'copyImgToDevFolder'
   'copyIndexToDistFolder'
 ]
 
@@ -543,8 +450,8 @@ gulp.task 'default', [
 # Dev tasks
 # =======================
 gulp.task 'watch'     , ['default'], watch
-gulp.task 'dev'       , ['watch', 'replaceJSDevVariables', 'replaceHTMLDevVariables', 'replaceIndexHTMLDevVariables']
-gulp.task 'buildDev'  , ['default', 'replaceJSDevVariables', 'replaceHTMLDevVariables', 'replaceIndexHTMLDevVariables']
+gulp.task 'dev'       , ['watch']
+gulp.task 'buildDev'  , ['default']
 
 
 # Release tasks
@@ -558,9 +465,6 @@ gulp.task 'copyImgToReleaseFolder'        , ['cleanRelease'             ], copyI
 gulp.task 'optimizeImgInReleaseFolder'    , ['copyImgToReleaseFolder'   ], optimizeImgInReleaseFolder
 gulp.task 'copyResourcesToReleaseFolder'  , ['cleanRelease'             ], copyResourcesToReleaseFolder
 gulp.task 'ofuscateJSFiles'               , ['proccessIndexFile'        ], ofuscateJSFiles
-gulp.task 'replaceJSProdVariables'        , ['build'                    ], -> replaceJSEnvVariables(envProdVariables, buildMode.prod)
-gulp.task 'replaceHTMLProdVariables'      , ['build'                    ], -> replaceHTMLEnvVariables(envProdVariables, buildMode.prod)
-gulp.task 'replaceIndexHTMLProdVariables' , ['build'                    ], -> replaceIndexHTMLEnvVariables(envProdVariables, buildMode.prod)
 
 
 gulp.task 'build', [
@@ -573,19 +477,17 @@ gulp.task 'build', [
   'optimizeImgInReleaseFolder'
   'copyResourcesToReleaseFolder'
 ]
-gulp.task 'release', [ 'build', 'replaceJSProdVariables', 'replaceHTMLProdVariables', 'replaceIndexHTMLProdVariables']
+gulp.task 'release', [ 'build' ]
 
 
 # Release Server Test
 # =======================
-gulp.task 'replaceJSServerTestVariables'        , ['default'                  ], -> replaceJSEnvVariables(envServerTestVariables, buildMode.dev)
-gulp.task 'replaceHTMLServerTestVariables'      , ['default'                  ], -> replaceHTMLEnvVariables(envServerTestVariables, buildMode.dev)
-gulp.task 'replaceIndexHTMLServerTestVariables' , ['default'                  ], -> replaceIndexHTMLEnvVariables(envServerTestVariables, buildMode.dev)
-gulp.task 'buildToServerTest'                   , ['default', 'replaceJSServerTestVariables', 'replaceHTMLServerTestVariables', 'replaceIndexHTMLServerTestVariables']
+gulp.task 'buildToServerTest' , ['default']
 
 # Test tasks
 # =======================
-gulp.task 'test'          , ['buildSpecScripts', 'runAppTests', 'watchSpecs']
+gulp.task 'buildSpecScripts' , [], buildAppScripts
+gulp.task 'test'          , [ 'runAppTests']
 # gulp.task 'testAndWatch'  , ['test', 'watchSpecs']
 
 
