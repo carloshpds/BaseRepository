@@ -67,7 +67,7 @@ paths =
       sourceFiles : 'src/**/*.{sass, scss}'
       mainSassFile: "src/main/styles/app.sass"
     html:
-      sourceFiles : 'src/**/*.html'
+      sourceFiles : ['src/**/*.html', '!src/**/*.js.html', '!src/**/index.html']
     img:
       sourceFiles : 'src/main/img/**/*.{jpeg, jpg, png}'
     resourcesFiles: 'src/main/resources/**/*'
@@ -271,6 +271,7 @@ watch = ->
   gulp.watch(paths.source.coffee.sourceFiles).on('change', (e) ->
     buildAppScripts()
       .on 'end', ->
+        runAppTestsFunction()
         gutil.log( gutil.colors.red('[CoffeeWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
@@ -280,7 +281,7 @@ watch = ->
         gutil.log( gutil.colors.red('[HtmlWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
-  gulp.watch(paths.source.html.sourceFiles).on('change', (e) ->
+  gulp.watch(paths.source.indexFile).on('change', (e) ->
     copyIndexToDistFolder()
       .on 'end', ->
         gutil.log( gutil.colors.red('[IndexFileWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
@@ -399,14 +400,17 @@ ofuscateJSFiles = ->
 
 # RunAppTests
 # ======================
-gulp.task 'runAppTests', ['buildSpecScripts'], () ->
+runAppTestsFunction = () ->
   gulp.src(paths.spec.js.sourceFiles)
     .pipe( karmaPlugin
       configFile: 'karma.conf.js'
-      action    : 'watch'
+      action    : 'run'
     )
     .on 'error', (err) ->
       console.log 'runAppTests: ' + err
+
+gulp.task 'runAppTests', [], runAppTestsFunction
+  
 
 
 
@@ -428,6 +432,7 @@ gulp.task 'buildMarkup'                  , ['cleanDev'                ], buildMa
 gulp.task 'copyResourcesToDevFolder'     , ['cleanDev'                ], copyResourcesToDevFolder
 gulp.task 'copyImgToDevFolder'           , ['cleanDev'                ], copyImgToDevFolder
 gulp.task 'copyIndexToDistFolder'        , ['copyResourcesToDevFolder'], copyIndexToDistFolder
+gulp.task 'runDevTests'                  , ['buildAppScripts', 'buildVendorsScripts'], runAppTestsFunction
 
 
 
@@ -444,6 +449,7 @@ gulp.task 'default', [
   'copyResourcesToDevFolder'
   'copyImgToDevFolder'
   'copyIndexToDistFolder'
+  'runDevTests'
 ]
 
 
@@ -486,8 +492,7 @@ gulp.task 'buildToServerTest' , ['default']
 
 # Test tasks
 # =======================
-gulp.task 'buildSpecScripts' , [], buildAppScripts
-gulp.task 'test'          , [ 'runAppTests']
+gulp.task 'test'          , ['runAppTests']
 # gulp.task 'testAndWatch'  , ['test', 'watchSpecs']
 
 
