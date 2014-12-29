@@ -137,22 +137,31 @@ paths =
       fonts  : 'release/resources/fonts/**/*'
       videos : 'release/resources/videos/**/*'
 
-
   spec :
     coffee:
       sourceFiles : ['spec/coffee/**/*.coffee']
     js:
       directory   : 'spec/js'
       sourceFiles : [
+        'dev/libs/jquery/jquery.js',
         'dev/libs/angular/angular.js',
-        'dev/libs/jquery/jquery.min.js',
         'dev/libs/underscore/underscore.js',
-        'dev/libs/angular-ui-router/release/angular-ui-router.min.js',
+        'dev/libs/angular-ui-router/release/angular-ui-router.js',
         'dev/libs/angular-mocks/angular-mocks.js',
-        'dev/libs/angular-sanitize/angular-sanitize.min.js',
-        'dev/scripts/**/*.js',
-        'dev/scripts/*.js',
-        'spec/**/*.js'
+        'dev/libs/angular-sanitize/angular-sanitize.js',
+        'dev/libs/angular-bootstrap/ui-bootstrap-tpls.js',
+        'dev/libs/underscore-string.js',
+        'dev/libs/momentjs/min/moment-with-langs.js',
+        'dev/libs/quick-ng-repeat/quick-ng-repeat.js',
+        'dev/scripts/main/scripts/app.js',
+        'dev/scripts/components/**/*.js',
+        'dev/scripts/features/**/*.js',
+        'dev/scripts/main/scripts/config/**/*.js',
+        'dev/scripts/main/scripts/constants/**/*.js',
+        'dev/scripts/main/scripts/runners/**/*.js',
+        'dev/views/**/*.html',
+        'spec/js/**/*.js'
+        'spec/utils/**/*.js'
       ]
 
 
@@ -190,11 +199,11 @@ install = ->
 # Build SASS
 # ======================
 buildVendorsSASS = ->
- gulp.src paths.vendors.sass.mainSassFile
-    .pipe sassPlugin()
-    .pipe minifyCssPlugin keepSpecialComments: 0
-    .pipe rename basename: 'vendors', extname: '.min.css'
-    .pipe gulp.dest paths.dev.cssDirectory
+ # gulp.src paths.vendors.sass.mainSassFile
+ #    .pipe sassPlugin()
+ #    .pipe minifyCssPlugin keepSpecialComments: 0
+ #    .pipe rename basename: 'vendors', extname: '.min.css'
+ #    .pipe gulp.dest paths.dev.cssDirectory
 
 # Build CSS
 # ======================
@@ -287,33 +296,33 @@ watch = ->
 
   gulp.watch(paths.source.coffee.sourceFiles).on('change', (e) ->
     buildAppScripts()
-      .on 'end', -> 
+      .on 'end', ->
         replaceJSEnvVariables(envDevVariables, buildMode.dev)
         gutil.log( gutil.colors.red('[CoffeeWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
   gulp.watch(paths.source.html.sourceFiles).on('change', (e) ->
     buildMarkup()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[HtmlWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
   gulp.watch(paths.source.html.sourceFiles).on('change', (e) ->
     copyIndexToDistFolder()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[IndexFileWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
 
   gulp.watch(paths.source.img.sourceFiles).on('change', (e) ->
     copyImgToDistFolder()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[CopyImgToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
   gulp.watch(paths.source.resourcesFiles).on('change', (e) ->
     copyResourcesToDistFolder()
-      .on 'end', -> 
+      .on 'end', ->
         gutil.log( gutil.colors.red('[CopyResourcesToDistFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
@@ -465,7 +474,8 @@ replaceIndexHTMLEnvVariables = (envVariablesMap, modeName) ->
 # Watch specs files
 # ======================
 gulp.task 'watchSpecs', ['buildSpecScripts'], ->
-  gulp.watch paths.source.coffee.sourceFiles    , ['buildSpecScripts']
+  gutil.log "[Build Spec Scripts]", gutil.colors.cyan 'Building...'
+  gulp.watch paths.spec.coffee.sourceFiles, ['buildSpecScripts']
 
 
 # Build CoffeeScript
@@ -483,7 +493,7 @@ gulp.task 'runAppTests', ['buildSpecScripts'], () ->
   gulp.src(paths.spec.js.sourceFiles)
     .pipe( karmaPlugin
       configFile: 'karma.conf.js'
-      action    : 'run'
+      action    : 'watch'
     )
     .on 'error', (err) ->
       console.log 'runAppTests: ' + err
@@ -575,7 +585,7 @@ gulp.task 'buildToServerTest'                   , ['default', 'replaceJSServerTe
 
 # Test tasks
 # =======================
-gulp.task 'test'          , ['buildSpecScripts', 'runAppTests']
-gulp.task 'testAndWatch'  , ['test', 'watchSpecs']
+gulp.task 'test'          , ['buildSpecScripts', 'runAppTests', 'watchSpecs']
+# gulp.task 'testAndWatch'  , ['test', 'watchSpecs']
 
 

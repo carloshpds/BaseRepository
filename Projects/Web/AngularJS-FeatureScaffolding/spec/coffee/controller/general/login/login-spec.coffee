@@ -8,8 +8,10 @@ describe 'Controller: LoginController', ()->
   # =============================================
   # Import modules
   # =============================================
-  beforeEach module('MyAngularOmakase.scripts')
   beforeEach module('ui.router')
+  beforeEach module('ui.bootstrap')
+  beforeEach module('MyAngularOmakase.scripts')
+  beforeEach module('stateMock')
 
   # =============================================
   # Variables
@@ -20,11 +22,15 @@ describe 'Controller: LoginController', ()->
   # =============================================
   # Inject dependencies
   # =============================================
-  beforeEach inject ($controller, $rootScope) ->
+  beforeEach inject ($controller, $rootScope, _LoginService_, _$state_, _$modal_) ->
     $scope          = $rootScope.$new()
-    LoginController = $controller 'LoginController', $scope: $scope
-    
-    
+    LoginController = $controller 'LoginController',
+      LoginService: _LoginService_
+      $scope: $scope
+      $state: _$state_
+      $modal: _$modal_
+
+
   # =============================================
   # Tests
   # =============================================
@@ -35,4 +41,4 @@ describe 'Controller: LoginController', ()->
 
   describe 'Attributes', ->
     it 'Should define facebookOptions', ->
-      expect(LoginController.facebookOptions).toBeDefined() 
+      expect(LoginController.facebookOptions).toBeDefined()

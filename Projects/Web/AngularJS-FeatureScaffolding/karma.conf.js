@@ -16,14 +16,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     // files: [
-    //   'dist/libs/angular/angular.js',
-    //   'dist/libs/jquery/jquery.js',
-    //   'dist/libs/underscore/underscore.js',
-    //   'dist/libs/angular-ui-router/release/angular-ui-router.js',
-    //   'dist/libs/angular-mocks/angular-mocks.js',
-    //   'dist/libs/angular-sanitize/angular-sanitize.js',
-    //   'dist/scripts/**/*.js',
-    //   'dist/views/**/*.html',
+    //   'dev/libs/angular/angular.js',
+    //   'dev/libs/jquery/jquery.js',
+    //   'dev/libs/underscore/underscore.js',
+    //   'dev/libs/angular-ui-router/release/angular-ui-router.js',
+    //   'dev/libs/angular-mocks/angular-mocks.js',
+    //   'dev/libs/angular-sanitize/angular-sanitize.js',
+    //   'dev/scripts/**/*.js',
+    //   'dev/views/**/*.html',
     //   'spec/**/*.js'
     // ],
 
@@ -48,13 +48,13 @@ module.exports = function(config) {
 
     // Preprocessors
     preprocessors: {
-      'dist/views/**/*.html' : ['ng-html2js'],
-      'dist/scripts/**/*.js' : ['coverage']
+      'dev/views/**/*.html' : ['ng-html2js'],
+      'dev/scripts/**/*.js' : ['coverage']
     },
 
     // HTML to JS
     // ngHtml2JsPreprocessor: {
-    //   stripPrefix : 'dist/'
+    //   stripPrefix : 'dev/'
     // },
 
     // Reporters - Generates the Coverage

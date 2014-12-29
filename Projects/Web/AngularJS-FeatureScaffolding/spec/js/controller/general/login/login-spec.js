@@ -1,14 +1,19 @@
 'use strict';
 describe('Controller: LoginController', function() {
   var $scope, LoginController;
-  beforeEach(module('MyAngularOmakase.scripts'));
   beforeEach(module('ui.router'));
+  beforeEach(module('ui.bootstrap'));
+  beforeEach(module('MyAngularOmakase.scripts'));
+  beforeEach(module('stateMock'));
   $scope = null;
   LoginController = null;
-  beforeEach(inject(function($controller, $rootScope) {
+  beforeEach(inject(function($controller, $rootScope, _LoginService_, _$state_, _$modal_) {
     $scope = $rootScope.$new();
     return LoginController = $controller('LoginController', {
-      $scope: $scope
+      LoginService: _LoginService_,
+      $scope: $scope,
+      $state: _$state_,
+      $modal: _$modal_
     });
   }));
   describe('clickLoginButtonHandler', function() {

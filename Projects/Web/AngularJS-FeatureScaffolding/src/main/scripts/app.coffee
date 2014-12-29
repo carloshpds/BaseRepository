@@ -78,7 +78,7 @@ angular.module('MyAngularOmakase', [
     # $httpProvider.defaults.headers.post      = "Content-Type": 'application/json'
   ])
 
-  
+
 
 
 
