@@ -6,7 +6,7 @@ A scaffolding not based on framework's structure, but only in features, settings
 
 ## Problems
 So you define your scaffolding according to your framework and what do you get? 
-When we use BackboneJS you have an folder foreach struct: Models, Collections and Views.
+When we use BackboneJS you have an folder foreach structure: Models, Collections and Views.
 And when we use AngularJS is the same thing, but you have a folders for Controllers, another one for Directives, Factories etc...
 
 That's all right, but if you think that a view has a template you'll need another folder almost at the top level of your scaffolding only to contain the template files, and is the same thing for stylesheets, could be something like this:
