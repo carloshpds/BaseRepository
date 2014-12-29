@@ -6,7 +6,7 @@
 module.exports = function(config) {
   config.set({
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -15,20 +15,21 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
-    files: [
-      'dist/libs/angular/angular.js',
-      'dist/libs/jquery/jquery.min.js',
-      'dist/libs/underscore/underscore.js',
-      'dist/libs/angular-ui-router/release/angular-ui-router.min.js',
-      'dist/libs/angular-mocks/angular-mocks.js',
-      'dist/libs/angular-sanitize/angular-sanitize.min.js',
-      'dist/scripts/**/*.js',
-      'dist/scripts/*.js',
-      'spec/**/*.js'
-    ],
+    // files: [
+    //   'dev/libs/angular/angular.js',
+    //   'dev/libs/jquery/jquery.js',
+    //   'dev/libs/underscore/underscore.js',
+    //   'dev/libs/angular-ui-router/release/angular-ui-router.js',
+    //   'dev/libs/angular-mocks/angular-mocks.js',
+    //   'dev/libs/angular-sanitize/angular-sanitize.js',
+    //   'dev/scripts/**/*.js',
+    //   'dev/views/**/*.html',
+    //   'spec/**/*.js'
+    // ],
 
     // list of files / patterns to exclude
-    exclude: [],
+    exclude: [
+    ],
 
     // web server port
     port: 8080,
@@ -42,13 +43,41 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS'
+      'Chrome'
     ],
+
+    // Preprocessors
+    preprocessors: {
+      'dev/views/**/*.html' : ['ng-html2js'],
+      'dev/scripts/**/*.js' : ['coverage']
+    },
+
+    // HTML to JS
+    // ngHtml2JsPreprocessor: {
+    //   stripPrefix : 'dev/'
+    // },
+
+    // Reporters - Generates the Coverage
+    reporters: [
+      'progress',
+      'coverage'
+    ],
+
+    // Output coverage file
+    coverageReporter: {
+      type : 'lcov',
+      subdir: 'report-lcov',
+
+      // output path
+      dir : 'spec/coverage/'
+    },
 
     // Which plugins to enable
     plugins: [
-      'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-ng-html2js-preprocessor',
+      'karma-coverage'
     ],
 
     // Continuous Integration mode

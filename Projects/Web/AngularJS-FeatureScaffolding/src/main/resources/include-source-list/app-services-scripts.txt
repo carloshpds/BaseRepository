@@ -1,5 +1,3 @@
 scripts/features/sign-up/scripts/sign-up-service.js
-
 scripts/features/login/scripts/login-service.js
-
 scripts/features/user/user-service.js
