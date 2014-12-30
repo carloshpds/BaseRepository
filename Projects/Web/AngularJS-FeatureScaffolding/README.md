@@ -1,4 +1,4 @@
-# * === Alpha version coming soon === *
+# * ===== Alpha Version Coming Soon ===== *
 
 # English
 
