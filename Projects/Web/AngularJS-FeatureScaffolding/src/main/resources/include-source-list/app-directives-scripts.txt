@@ -1,1 +1,0 @@
-scripts/components/directives/notify-on-finish-ng-repeat/scripts/notify-on-finish-ng-repeat-directive.js

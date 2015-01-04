@@ -1,1 +1,0 @@
-scripts/main/scripts/runners/social/facebook-sdk-initializer.js

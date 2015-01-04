@@ -8,10 +8,10 @@ angular.module 'MyAngularOmakase.services'
   # =============================================
   # SignUpService
   # =============================================
-  .service 'SignUpService', ['$http', 'SG_BASE_URL', ($http, SG_BASE_URL) ->
+  .service 'SignUpService', ['$http', 'APP_BASE_URL', ($http, APP_BASE_URL) ->
     signUp: (params) ->
       $http
-        url         : SG_BASE_URL + 'signUp'
+        url         : APP_BASE_URL + 'signUp'
         method      : 'POST'
         params      : params
   ]

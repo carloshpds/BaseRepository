@@ -15,8 +15,11 @@ angular.module 'MyAngularOmakase'
     window.fbAsyncInit = () ->
       FB.init(
         appId      : 'XXXXXXX' # Change XXXXXXX to your AppId
-        xfbml      : true
-        version    : 'v2.0'
+        xfbml      : yes
+        version    : 'v2.1'
+        status     : yes
+        oauth      : yes
+        cookie     : yes
       )
 
     do (d = document, s = 'script', id = 'facebook-jssdk') ->

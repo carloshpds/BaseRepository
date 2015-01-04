@@ -1,1 +1,0 @@
-scripts/components/filters/messages/messages-filter.js

@@ -1,0 +1,8 @@
+scripts/features/login/scripts/login-controller.js
+scripts/features/login/scripts/login-interceptor.js
+scripts/features/login/scripts/login-routes.js
+scripts/features/login/scripts/login-service.js
+
+scripts/features/sign-up/scripts/sign-up-controller.js
+
+scripts/features/user/user-service.js

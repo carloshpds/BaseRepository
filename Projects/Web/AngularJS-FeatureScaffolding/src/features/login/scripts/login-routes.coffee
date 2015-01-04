@@ -10,9 +10,21 @@ angular.module 'MyAngularOmakase'
   # =============================================
   .config( ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
 
-    # Default State
+    # States
     # =============================================
-    $urlRouterProvider.otherwise('/login')
+    $stateProvider
+
+
+      # Login
+      # ==============================
+      .state('login'
+        url         : '/login'
+        templateUrl : 'views/features/login/views/login.html'
+        controller  : 'LoginController'
+        data        : 
+          restrict  : no
+      )
+
 
     
   ])

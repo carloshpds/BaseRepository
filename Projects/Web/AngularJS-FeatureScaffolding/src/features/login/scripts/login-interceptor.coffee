@@ -13,7 +13,7 @@ angular.module 'MyAngularOmakase'
     # =============================================
     # UserLoginInterceptor
     # =============================================
-    $provide.factory 'UserLoginInterceptor', [ '$q', '$injector', ($q, $injector) ->
+    $provide.factory 'UserLoginInterceptor', [ '$q', '$injector', '$rootScope', ($q, $injector, $rootScope) ->
       
       'request': (config) ->
         return config
@@ -26,9 +26,9 @@ angular.module 'MyAngularOmakase'
 
       'responseError': (rejection)->
         if rejection.status is 401
-          $injector.invoke ['$state', 'LoggedUserFactory', 'NotLoggedUserStates', ($state, LoggedUserFactory, NotLoggedUserStates) ->
+          $injector.invoke ['$state', '$rootScope', ($state, $rootScope) ->
             if $state.current.data.restrict
-              LoggedUserFactory.set null 
+              $rootScope.user = null 
               $state.go 'login'
           ]
 

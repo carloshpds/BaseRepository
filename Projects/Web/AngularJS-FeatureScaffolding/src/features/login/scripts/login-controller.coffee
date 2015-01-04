@@ -30,12 +30,6 @@ angular.module 'MyAngularOmakase.controllers'
       # =============================================
       # Handlers
       # =============================================
-      $scope.clickLoginButtonHandler = () ->
-        $scope.doLogin()
-
-      $scope.clickCadastrarButtonHandler = ->
-        $scope.signUp()
-
       $scope.doLoginWithFacebook = () =>
         if $window.FB
           do @checkLoginState

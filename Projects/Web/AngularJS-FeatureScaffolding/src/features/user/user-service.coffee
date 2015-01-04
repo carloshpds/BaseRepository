@@ -8,11 +8,11 @@ angular.module 'MyAngularOmakase.services'
   # =============================================
   # UserService
   # =============================================
-  .service 'UserService', ['$http', 'SG_BASE_URL', ($http, SG_BASE_URL) ->
+  .service 'UserService', ['$http', 'APP_BASE_URL', ($http, APP_BASE_URL) ->
     
     getLoggedUserInfo: (data) ->
       $http
-        url           : SG_BASE_URL + 'user/info'
+        url           : APP_BASE_URL + 'user/info'
         method        : 'GET'
         nointercept   : yes
   ]
