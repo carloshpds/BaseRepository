@@ -206,7 +206,7 @@ buildAppStyles = () ->
     .pipe plumberPlugin()
     .pipe gulpSassPlugin(
       indentedSyntax: yes
-      onError: (error) -> console.log('SASS-ERROR: ' + error.message);
+      onError: (error) -> console.log("\n #{gutil.colors.red('=== [SASS-ERROR] ===')} \n\n #{gutil.colors.red(error)}")
     )
     .pipe minifyCssPlugin keepSpecialComments: 0
     .pipe rename basename: "app", extname: '.min.css'

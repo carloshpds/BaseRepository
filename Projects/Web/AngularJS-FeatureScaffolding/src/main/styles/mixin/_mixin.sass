@@ -4,25 +4,8 @@
 // =============================================
 
 
-=placeHolderColor($color)
-  &::-webkit-input-placeholder
-    color       : $color
-    font-style  : italic
-    font-weight : 100
-
-  // Firefox 18-
-  &:-moz-placeholder
-    color       : $color
-    font-style  : italic
-    font-weight : 100
-
-  // Firefox 19+
-  &::-moz-placeholder
-    color       : $color
-    font-style  : italic
-    font-weight : 100
-
-  &:-ms-input-placeholder
-    color       : $color
-    font-style  : italic
-    font-weight : 100
+@import "box-shadow"
+@import "placeholder-color"
+@import "border-radius"
+@import "disable-selection"
+@import "animation"
