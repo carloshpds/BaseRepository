@@ -69,7 +69,7 @@ paths =
     html:
       sourceFiles : ['src/**/*.html', '!src/**/*.js.html', '!src/**/index.html']
     img:
-      sourceFiles : 'src/main/img/**/*.{jpeg, jpg, png}'
+      sourceFiles : 'src/main/**/*.{jpeg, jpg, png}'
     resourcesFiles: 'src/main/resources/**/*'
     indexFile: 'src/main/index.html'
 
@@ -241,7 +241,7 @@ copyImgToDevFolder = ->
 
 # Copy index.html
 # ======================
-copyIndexToDistFolder = ->
+copyIndexToDevFolder = ->
   gulp.src(paths.source.indexFile)
     .pipe gulp.dest(paths.dev.directory)
     .on 'end', includeSources
@@ -262,12 +262,16 @@ watch = ->
   # liveReloadPlugin.listen(LIVE_RELOAD_PORT)
   # gulp.watch(paths.dev.files).on 'change', liveReloadPlugin.changed
 
+  # SASS Files
+  # ==================
   gulp.watch(paths.source.sass.sourceFiles).on('change', (e) ->
     buildAppStyles()
       .on 'end', ->
         gutil.log( gutil.colors.red('[SassWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
+  # Scripts
+  # ==================
   gulp.watch(paths.source.coffee.sourceFiles).on('change', (e) ->
     buildAppScripts()
       .on 'end', ->
@@ -275,29 +279,39 @@ watch = ->
         gutil.log( gutil.colors.red('[CoffeeWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
+  # HTMLs
+  # ==================
   gulp.watch(paths.source.html.sourceFiles).on('change', (e) ->
     buildMarkup()
       .on 'end', ->
         gutil.log( gutil.colors.red('[HtmlWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
+  # Index
+  # ==================
   gulp.watch(paths.source.indexFile).on('change', (e) ->
-    copyIndexToDistFolder()
+    copyIndexToDevFolder()
       .on 'end', ->
         gutil.log( gutil.colors.red('[IndexFileWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
 
+  # Imgs
+  # ==================
   gulp.watch(paths.source.img.sourceFiles).on('change', (e) ->
     copyImgToDevFolder()
       .on 'end', ->
         gutil.log( gutil.colors.red('[CopyImgToDevFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
+  # Resources
+  # ==================
   gulp.watch(paths.source.resourcesFiles).on('change', (e) ->
     copyResourcesToDevFolder()
       .on 'end', ->
-        gutil.log( gutil.colors.red('[CopyResourcesToDevFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
+        copyIndexToDevFolder()
+        .on 'end', ->
+          gutil.log( gutil.colors.red('[CopyResourcesToDevFolder] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
 # ==================================
@@ -431,7 +445,7 @@ gulp.task 'buildAppScripts'              , ['cleanDev'                ], buildAp
 gulp.task 'buildMarkup'                  , ['cleanDev'                ], buildMarkup
 gulp.task 'copyResourcesToDevFolder'     , ['cleanDev'                ], copyResourcesToDevFolder
 gulp.task 'copyImgToDevFolder'           , ['cleanDev'                ], copyImgToDevFolder
-gulp.task 'copyIndexToDistFolder'        , ['copyResourcesToDevFolder'], copyIndexToDistFolder
+gulp.task 'copyIndexToDevFolder'         , ['copyResourcesToDevFolder'], copyIndexToDevFolder
 gulp.task 'runDevTests'                  , ['buildAppScripts', 'buildVendorsScripts'], runAppTestsFunction
 
 
@@ -448,7 +462,7 @@ gulp.task 'default', [
   'buildMarkup'
   'copyResourcesToDevFolder'
   'copyImgToDevFolder'
-  'copyIndexToDistFolder'
+  'copyIndexToDevFolder'
   'runDevTests'
 ]
 

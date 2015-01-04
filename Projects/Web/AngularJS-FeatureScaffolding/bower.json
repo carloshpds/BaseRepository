@@ -23,12 +23,9 @@
     "angular-sanitize"        : "~1.2.22",
     "bootstrap"               : "~3.2.0" ,
     "angular-bootstrap"       : "~0.11.0",
-    "jquery-cycle2"           : "~2.1.5" ,
     "pace"                    : "~0.5.1" ,
     "angular-spinner"         : "~0.5.1" ,
     "spin.js"                 : "~2.0.1" ,
-    "videojs-youtube"         : "~1.2.5" ,
-    "angulartics"             : "~0.16.5",
-    "jquery-custom-scrollbar" : "mzubala/jquery-custom-scrollbar#master"
+    "angulartics"             : "~0.16.5"
   }
 }
