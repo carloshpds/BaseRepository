@@ -52,12 +52,12 @@ bowerDirectory = 'bower_components/**/*'
 
 paths =
   vendors :
-    scripts      : 'vendors/scripts/**/*.js'
+    scripts      : 'vendors/**/*.js'
     sass:
-      sourceFiles : 'vendors/styles/**/*.{sass, scss}'
-      mainSassFile: 'vendors/styles/vendors.sass'
+      sourceFiles : 'vendors/**/*.{sass, scss}'
+      mainSassFile: 'vendors/vendors.sass'
     css :
-      sourceFiles : 'vendors/styles/**/*.css'
+      sourceFiles : 'vendors/**/*.css'
 
 
   source :

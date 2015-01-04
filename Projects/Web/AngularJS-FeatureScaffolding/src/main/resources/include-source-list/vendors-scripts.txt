@@ -2,7 +2,7 @@ libs/jquery/jquery.js
 libs/angular/angular.js
 libs/angular-bootstrap/ui-bootstrap-tpls.min.js
 libs/underscore/underscore.js
-libs/underscore-string.min.js
+libs/underscore-string/underscore-string.min.js
 libs/momentjs/min/moment-with-langs.min.js
 libs/angular-route/angular-route.min.js
 libs/angular-ui-router/release/angular-ui-router.min.js
