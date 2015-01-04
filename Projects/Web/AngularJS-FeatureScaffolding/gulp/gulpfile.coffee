@@ -69,7 +69,7 @@ paths =
     html:
       sourceFiles : ['src/**/*.html', '!src/**/*.js.html', '!src/**/index.html']
     img:
-      sourceFiles : 'src/main/**/*.{jpeg, jpg, png}'
+      sourceFiles : 'src/**/img/**/*.*'
     resourcesFiles: 'src/main/resources/**/*'
     indexFile: 'src/main/index.html'
 
