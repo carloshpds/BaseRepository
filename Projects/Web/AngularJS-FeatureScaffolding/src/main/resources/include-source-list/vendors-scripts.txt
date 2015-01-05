@@ -9,5 +9,3 @@ libs/angular-ui-router/release/angular-ui-router.min.js
 libs/angular-mocks/angular-mocks.js
 libs/angular-sanitize/angular-sanitize.min.js
 libs/quick-ng-repeat/quick-ng-repeat.js
-libs/jquery-cycle2/build/jquery.cycle2.js
-libs/jquery-cycle2/build/plugin/jquery.cycle2.carousel.min.js

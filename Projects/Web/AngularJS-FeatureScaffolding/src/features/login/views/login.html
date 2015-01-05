@@ -1,4 +1,4 @@
-<div id="myo-login-screen" class="app-view" myo-scrollbar>
+<div id="myo-login-screen" class="app-view">
   
   <!-- Barra Principal -->
   <header class="myo-main-bar">
@@ -17,7 +17,7 @@
     </div>
     
     <div class="row">
-      <div id="welcome-text-container" class="col-xs-12 col-md-12 myo-font-size-33 myo-font-lightitalic text-center">
+      <div id="welcome-text-container" class="col-xs-12 col-md-12 myo-font-size-33 myo-font-lightitalic text-center text-white">
         <span>Oh Yeeeeah, it's gonna be legen...   wait for...   daaary!</span>
       </div>
     </div>
@@ -26,79 +26,86 @@
     <div id="wizard-container" class="margin-top-default">
       <div>
         <!-- Facebook -->
-        <div class="row">
-          <div class="col-xs-6 col-xs-offset-3 text-center margin-top-default"  >
-            <button class="btn btn-primary form-control center-box" ng-click="doLoginWithFacebook()"  ng-disabled="!ableToConnectWithFacebook">
-              <span class="myo-font-lightitalic">Conecte-se usando o</span> <strong>facebook</strong>
-            </button>
+        <div class="row animated fast bounceIn">
+          <div class="col-xs-6 col-xs-offset-3 text-center margin-top-default panel panel-default"  >
+            <div class="panel-body">
+              <button class="btn btn-primary form-control center-box" 
+                ng-click="doLoginWithFacebook()"  
+                ng-disabled="!ableToConnectWithFacebook">
+                <span class="myo-font-lightitalic">Conecte-se usando o</span> <strong>facebook</strong>
+              </button>
+            </div>
           </div>
         </div>
         
         <!-- Divisor -->
-        <div class="row margin-top-default">
-          <div class="col-xs-4 col-xs-offset-4 text-center">
+        <div class="row animated fast bounceIn">
+          <div class="col-xs-4 col-xs-offset-4 text-center text-white">
             <span class="myo-font-lightitalic">ou</span>
           </div>
         </div>
 
         <!-- Form de login -->
-        <div class="row margin-top-default">
-          <div class="col-xs-6 col-xs-offset-3 text-center"  >
-            <form novalidate id="login-form" class="css-form center-box" name="loginForm" ng-submit="doLogin()">
+        <div class="row margin-top-default animated fast bounceIn">
+          <div class="col-xs-6 col-xs-offset-3 text-center no-padding"  >
+            <form novalidate id="login-form" class="css-form center-box panel panel-default" name="loginForm" ng-submit="doLogin()">
               
-              <div class="row">
-                <div id="user-name-container" class="col-xs-12 no-padding">
-                  <input type="text" 
-                    id         = "user-name" 
-                    placeholder= "Nome" 
-                    ng-model   = "user.firstName" 
-                    name       = "user-name" 
-                    class      = "form-control myo-input text-center"
-                    ng-class="{ 
-                      'has-error' : loginForm['user-name'].$invalid && !loginForm['user-name'].$pristine,
-                      'filled'    : user.firstName.length > 0
-                    }"
-                    required>
-                  <p 
-                    ng-class="{'help-block': true, 'help-error': true}" 
-                    ng-show="loginForm['user-name'].$error.required && !loginForm['user-name'].$pristine">
-                    Campo obrigatório
-                  </p>
+              <div class="panel-body">
+                <div class="row">
+                  <div id="user-name-container" class="col-xs-12 no-padding">
+                    <input type="text" 
+                      id         = "user-name" 
+                      placeholder= "Nome" 
+                      ng-model   = "user.firstName" 
+                      name       = "user-name" 
+                      class      = "form-control myo-input text-center"
+                      ng-class="{ 
+                        'has-error' : loginForm['user-name'].$invalid && !loginForm['user-name'].$pristine,
+                        'filled'    : user.firstName.length > 0
+                      }"
+                      required>
+                    <p 
+                      ng-class="{'help-block': true, 'help-error': true}" 
+                      ng-show="loginForm['user-name'].$error.required && !loginForm['user-name'].$pristine">
+                      Campo obrigatório
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="row margin-top-default">
-                <div class="col-xs-12 no-padding">
-                  <input type="email" 
-                    id          = "user-email" 
-                    placeholder = "E-mail" 
-                    name        = "user-email" 
-                    ng-model    = "user.email"
-                    class       = "form-control myo-input text-center"
-                    ng-class    = "{ 
-                      'has-error' : loginForm['user-email'].$invalid && !loginForm['user-email'].$pristine,
-                      'filled'    : user.email.length > 0
-                    }"
-                    required>
-                  <p 
-                    ng-class="{'help-block': true, 'help-error': true}" 
-                    ng-show="loginForm['user-email'].$error.required && !loginForm['user-email'].$pristine">
-                    Campo obrigatório
-                  </p>
-                  <p 
-                    ng-class="{'help-block': true, 'help-error': true}" 
-                    ng-show="loginForm['user-email'].$error.email && !loginForm['user-email'].$pristine">
-                    Digite um e-mail válido
-                  </p>
+                <div class="row margin-top-default">
+                  <div class="col-xs-12 no-padding">
+                    <input type="email" 
+                      id          = "user-email" 
+                      placeholder = "E-mail" 
+                      name        = "user-email" 
+                      ng-model    = "user.email"
+                      class       = "form-control myo-input text-center"
+                      ng-class    = "{ 
+                        'has-error' : loginForm['user-email'].$invalid && !loginForm['user-email'].$pristine,
+                        'filled'    : user.email.length > 0
+                      }"
+                      required>
+                    <p 
+                      ng-class="{'help-block': true, 'help-error': true}" 
+                      ng-show="loginForm['user-email'].$error.required && !loginForm['user-email'].$pristine">
+                      Campo obrigatório
+                    </p>
+                    <p 
+                      ng-class="{'help-block': true, 'help-error': true}" 
+                      ng-show="loginForm['user-email'].$error.email && !loginForm['user-email'].$pristine">
+                      Digite um e-mail válido
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="row margin-top-default">
-                <div class="col-xs-12 no-padding text-center"  >
-                  <button type="submit" class="btn btn-warning form-control" ng-disabled="loginForm.$invalid">
-                    <span class="myo-font-lightitalic">Login</span>
-                  </button>
+                <div class="row margin-top-default">
+                  <div class="col-xs-12 no-padding text-center"  >
+                    <button type="submit" class="btn btn-warning form-control" ng-disabled="loginForm.$invalid">
+                      <span class="myo-font-lightitalic">Login</span>
+                    </button>
+                  </div>
                 </div>
+
               </div>
             </form>
           </div>
