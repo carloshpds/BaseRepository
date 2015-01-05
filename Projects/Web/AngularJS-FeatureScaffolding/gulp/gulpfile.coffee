@@ -133,8 +133,8 @@ paths =
         'dev/scripts/main/scripts/constants/**/*.js',
         'dev/scripts/main/scripts/runners/**/*.js',
         'dev/views/**/*.html',
-        'dev/scripts/**/spec/**/*.js'
-        'dev/scripts/main/spec/utils/**/*.js'
+        'dev/scripts/**/specs/**/*.js'
+        'dev/scripts/main/specs/utils/**/*.js'
       ]
 
 
@@ -275,7 +275,7 @@ watch = ->
   gulp.watch(paths.source.coffee.sourceFiles).on('change', (e) ->
     buildAppScripts()
       .on 'end', ->
-        runAppTestsFunction()
+        runAppTestsFunction('run')
         gutil.log( gutil.colors.red('[CoffeeWatcher] ') + gutil.colors.magenta( _.last(e.path.split('/')) ) + ' was changed' )
   )
 
@@ -414,16 +414,16 @@ ofuscateJSFiles = ->
 
 # RunAppTests
 # ======================
-runAppTestsFunction = () ->
+runAppTestsFunction = (actionString) ->
   gulp.src(paths.spec.js.sourceFiles)
     .pipe( karmaPlugin
       configFile: 'karma.conf.js'
-      action    : 'run'
+      action    : actionString
     )
     .on 'error', (err) ->
       console.log 'runAppTests: ' + err
 
-gulp.task 'runAppTests', [], runAppTestsFunction
+gulp.task 'runAppTests', [], -> runAppTestsFunction('run')
   
 
 
@@ -446,7 +446,7 @@ gulp.task 'buildMarkup'                  , ['cleanDev'                ], buildMa
 gulp.task 'copyResourcesToDevFolder'     , ['cleanDev'                ], copyResourcesToDevFolder
 gulp.task 'copyImgToDevFolder'           , ['cleanDev'                ], copyImgToDevFolder
 gulp.task 'copyIndexToDevFolder'         , ['copyResourcesToDevFolder'], copyIndexToDevFolder
-gulp.task 'runDevTests'                  , ['buildAppScripts', 'buildVendorsScripts'], runAppTestsFunction
+gulp.task 'runDevTests'                  , ['buildAppScripts', 'buildVendorsScripts'], -> runAppTestsFunction('run')
 
 
 
@@ -487,7 +487,7 @@ gulp.task 'copyResourcesToReleaseFolder'  , ['cleanRelease'             ], copyR
 gulp.task 'ofuscateJSFiles'               , ['proccessIndexFile'        ], ofuscateJSFiles
 
 
-gulp.task 'build', [
+gulp.task 'buildRelease', [
   'cleanRelease'
   'proccessIndexFile'
   'copyMarkupToReleaseFolder'
@@ -497,7 +497,7 @@ gulp.task 'build', [
   'optimizeImgInReleaseFolder'
   'copyResourcesToReleaseFolder'
 ]
-gulp.task 'release', [ 'build' ]
+gulp.task 'release', [ 'buildRelease' ]
 
 
 # Release Server Test
@@ -507,6 +507,7 @@ gulp.task 'buildToServerTest' , ['default']
 # Test tasks
 # =======================
 gulp.task 'test'          , ['runAppTests']
+gulp.task 'spec'          , ['test']
 # gulp.task 'testAndWatch'  , ['test', 'watchSpecs']
 
 
