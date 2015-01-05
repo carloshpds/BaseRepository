@@ -76,65 +76,65 @@ paths =
 
 
   dev :
-    directory          : 'dev/'
-    jsDirectory        : 'dev/scripts/'
-    cssDirectory       : 'dev/styles/'
-    htmlDirectory      : 'dev/views/'
-    imgDirectory       : 'dev/img/'
-    indexFile          : 'dev/index.html'
-    libsDirectory      : 'dev/libs/'
-    resourcesDirectory : 'dev/resources/'
+    directory          : 'builds/dev/'
+    jsDirectory        : 'builds/dev/scripts/'
+    cssDirectory       : 'builds/dev/styles/'
+    htmlDirectory      : 'builds/dev/views/'
+    imgDirectory       : 'builds/dev/img/'
+    indexFile          : 'builds/dev/index.html'
+    libsDirectory      : 'builds/dev/libs/'
+    resourcesDirectory : 'builds/dev/resources/'
     resourcesFiles     :
-      fonts  : 'dev/resources/fonts/**/*'
-      videos : 'dev/resources/videos/**/*'
-    files              : ['dev/scripts/**/*', 'dev/styles/**/*', 'dev/views/**/*', 'dev/img/**/*', 'dev/index.html']
-    vendorsCssFile     : 'dev/styles/vendors.min.css'
-    jsFiles            : 'dev/scripts/**/*'
-    cssFiles           : 'dev/styles/**/*'
-    htmlFiles          : 'dev/views/**/*'
-    imgFiles           : 'dev/img/**/*'
+      fonts  : 'builds/dev/resources/fonts/**/*'
+      videos : 'builds/dev/resources/videos/**/*'
+    files              : ['builds/dev/scripts/**/*', 'builds/dev/styles/**/*', 'builds/dev/views/**/*', 'builds/dev/img/**/*', 'builds/dev/index.html']
+    vendorsCssFile     : 'builds/dev/styles/vendors.min.css'
+    jsFiles            : 'builds/dev/scripts/**/*'
+    cssFiles           : 'builds/dev/styles/**/*'
+    htmlFiles          : 'builds/dev/views/**/*'
+    imgFiles           : 'builds/dev/img/**/*'
 
   release :
-    directory           : 'release/'
-    indexFile           : 'release/index.html'
-    htmlDirectory       : 'release/views/'
-    htmlFiles           : 'release/views/**/*'
-    cssDirectory        : 'release/styles/'
-    cssFiles            : 'release/styles/**/*'
-    jsDirectory         : 'release/scripts/'
-    jsFiles             : 'release/scripts/**/*'
-    imgDirectory        : 'release/img/'
-    imgFiles            : 'release/img/**/*'
+    directory           : 'builds/release/'
+    indexFile           : 'builds/release/index.html'
+    htmlDirectory       : 'builds/release/views/'
+    htmlFiles           : 'builds/release/views/**/*'
+    cssDirectory        : 'builds/release/styles/'
+    cssFiles            : 'builds/release/styles/**/*'
+    jsDirectory         : 'builds/release/scripts/'
+    jsFiles             : 'builds/release/scripts/**/*'
+    imgDirectory        : 'builds/release/img/'
+    imgFiles            : 'builds/release/img/**/*'
     resourcesDirectory  :
-      fonts  : 'release/resources/fonts/'
-      videos : 'release/resources/videos/'
+      fonts  : 'builds/release/resources/fonts/'
+      videos : 'builds/release/resources/videos/'
     resourcesFiles  :
-      fonts  : 'release/resources/fonts/**/*'
-      videos : 'release/resources/videos/**/*'
+      fonts  : 'builds/release/resources/fonts/**/*'
+      videos : 'builds/release/resources/videos/**/*'
 
   spec :
     js:
-      directory   : 'dev/spec/'
+      directory   : 'builds/dev/spec/'
       sourceFiles : [
-        'dev/libs/jquery/jquery.js',
-        'dev/libs/angular/angular.js',
-        'dev/libs/underscore/underscore.js',
-        'dev/libs/angular-ui-router/release/angular-ui-router.js',
-        'dev/libs/angular-mocks/angular-mocks.js',
-        'dev/libs/angular-sanitize/angular-sanitize.js',
-        'dev/libs/angular-bootstrap/ui-bootstrap-tpls.js',
-        'dev/libs/underscore-string.js',
-        'dev/libs/momentjs/min/moment-with-langs.js',
-        'dev/libs/quick-ng-repeat/quick-ng-repeat.js',
-        'dev/scripts/main/scripts/app.js',
-        'dev/scripts/components/**/*.js',
-        'dev/scripts/features/**/*.js',
-        'dev/scripts/main/scripts/config/**/*.js',
-        'dev/scripts/main/scripts/constants/**/*.js',
-        'dev/scripts/main/scripts/runners/**/*.js',
-        'dev/views/**/*.html',
-        'dev/scripts/**/specs/**/*.js'
-        'dev/scripts/main/specs/utils/**/*.js'
+        'builds/dev/libs/jquery/jquery.js',
+        'builds/dev/libs/angular/angular.js',
+        'builds/dev/libs/underscore/underscore.js',
+        'builds/dev/libs/angular-ui-router/release/angular-ui-router.js',
+        'builds/dev/libs/angular-mocks/angular-mocks.js',
+        'builds/dev/libs/angular-sanitize/angular-sanitize.js',
+        'builds/dev/libs/angular-bootstrap/ui-bootstrap-tpls.js',
+        'builds/dev/libs/underscore-string.js',
+        'builds/dev/libs/momentjs/min/moment-with-langs.js',
+        'builds/dev/libs/quick-ng-repeat/quick-ng-repeat.js',
+        'builds/dev/scripts/main/scripts/app.js',
+        'builds/dev/scripts/components/**/*.js',
+        'builds/dev/scripts/features/**/*.js',
+        'builds/dev/scripts/main/scripts/config/**/*.js',
+        'builds/dev/scripts/main/scripts/constants/**/*.js',
+        'builds/dev/scripts/main/scripts/runners/**/*.js',
+        'builds/dev/views/**/*.html',
+        'builds/dev/scripts/**/specs/**/*.js'
+        'builds/dev/scripts/main/specs/utils/**/*.js'
       ]
 
 
