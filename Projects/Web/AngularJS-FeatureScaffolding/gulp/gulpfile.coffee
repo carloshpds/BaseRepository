@@ -506,8 +506,11 @@ gulp.task 'buildToServerTest' , ['default']
 
 # Test tasks
 # =======================
-gulp.task 'test'          , ['runAppTests']
+gulp.task 'test'          , [], -> runAppTestsFunction('watch')
 gulp.task 'spec'          , ['test']
+
+gulp.task 'watchTests'          , [], -> runAppTestsFunction('watch')
+gulp.task 'debugTests'          , ['test']
 # gulp.task 'testAndWatch'  , ['test', 'watchSpecs']
 
 
