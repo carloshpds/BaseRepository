@@ -1,4 +1,4 @@
-# * === Moved to https://github.com/TimeoutZero/ngFeatures === *
+# Moved to https://github.com/TimeoutZero/ngFeatures
 
 
 ## Feature Scaffolding
